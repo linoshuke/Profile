@@ -1,89 +1,140 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Nama Anda</title>
+    <link href="src/output.css" rel="stylesheet">
+    <!-- Tambahkan Favicon dan Font jika diperlukan -->
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/12.1.0/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/12.1.0/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/12.1.0/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/12.1.0/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/12.1.0/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/12.1.0/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/12.1.0/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/12.1.0/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/12.1.0/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/12.1.0/firebase-performance-compat.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    <!-- HEADER & NAVIGASI -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="text-2xl font-bold text-gray-900">NamaAnda.</a>
+            <div class="hidden md:flex space-x-6">
+                <a href="#home" class="text-gray-600 hover:text-blue-500 transition duration-300">Home</a>
+                <a href="#about" class="text-gray-600 hover:text-blue-500 transition duration-300">Tentang</a>
+                <a href="#projects" class="text-gray-600 hover:text-blue-500 transition duration-300">Proyek</a>
+                <a href="#contact" class="text-gray-600 hover:text-blue-500 transition duration-300">Kontak</a>
+            </div>
+            <!-- Tombol Hamburger untuk Mobile -->
+            <button id="mobile-menu-button" class="md:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </nav>
+        <!-- Menu Mobile -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pt-2 pb-4 space-y-2">
+            <a href="#home" class="block text-gray-600 hover:text-blue-500">Home</a>
+            <a href="#about" class="block text-gray-600 hover:text-blue-500">Tentang</a>
+            <a href="#projects" class="block text-gray-600 hover:text-blue-500">Proyek</a>
+            <a href="#contact" class="block text-gray-600 hover:text-blue-500">Kontak</a>
+        </div>
+    </header>
 
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
-    </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
+    <main>
+        <!-- ====== BAGIAN HOME ====== -->
+        <section id="home" class="min-h-screen flex items-center bg-white reveal">
+            <div class="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-6xl font-bold text-gray-900 leading-tight mb-4">Halo, Saya [Nama Anda]!</h1>
+                    <p class="text-lg text-gray-600 mb-6">Seorang Web Developer yang bersemangat dalam menciptakan solusi digital yang fungsional dan menarik.</p>
+                    <a href="#projects" class="bg-blue-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-600 transition duration-300">Lihat Proyek Saya</a>
+                </div>
+                <div class="md:w-1/3">
+                    <img src="assets/images/profile.jpg" alt="Foto Profil" class="rounded-full shadow-2xl w-64 h-64 mx-auto object-cover">
+                </div>
+            </div>
+        </section>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+        <!-- ====== BAGIAN TENTANG ====== -->
+        <section id="about" class="py-20 reveal">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-12">Tentang Saya</h2>
+                <div class="flex flex-col md:flex-row items-center gap-10">
+                    <div class="md:w-2/3">
+                        <h3 class="text-2xl font-semibold mb-4">Latar Belakang</h3>
+                        <p class="text-gray-600 mb-6">Deskripsikan latar belakang pendidikan, profesional, dan minat Anda di sini. Jelaskan perjalanan Anda menjadi seorang developer.</p>
+                        <h3 class="text-2xl font-semibold mb-4">Keahlian (Skills)</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-100 text-blue-800 py-1 px-3 rounded-full text-sm">HTML</span>
+                            <span class="bg-blue-100 text-blue-800 py-1 px-3 rounded-full text-sm">CSS</span>
+                            <span class="bg-blue-100 text-blue-800 py-1 px-3 rounded-full text-sm">JavaScript</span>
+                            <span class="bg-blue-100 text-blue-800 py-1 px-3 rounded-full text-sm">Tailwind CSS</span>
+                            <span class="bg-blue-100 text-blue-800 py-1 px-3 rounded-full text-sm">Firebase</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
-        }
-      });
-    </script>
-  </body>
+        <!-- ====== BAGIAN PROYEK ====== -->
+        <section id="projects" class="py-20 bg-white reveal">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-12">Proyek Saya</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Proyek 1 -->
+                    <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition duration-300">
+                        <img src="assets/images/project1.jpg" alt="Gambar Proyek 1" class="w-full h-56 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Nama Proyek 1</h3>
+                            <p class="text-gray-600 mb-4">Deskripsi singkat tentang proyek ini, teknologi yang digunakan, dan tujuannya.</p>
+                            <a href="#" class="text-blue-500 font-semibold hover:underline">Lihat Detail &rarr;</a>
+                        </div>
+                    </div>
+                    <!-- Proyek 2 -->
+                    <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition duration-300">
+                        <img src="assets/images/project2.jpg" alt="Gambar Proyek 2" class="w-full h-56 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Nama Proyek 2</h3>
+                            <p class="text-gray-600 mb-4">Deskripsi singkat tentang proyek ini, teknologi yang digunakan, dan tujuannya.</p>
+                            <a href="#" class="text-blue-500 font-semibold hover:underline">Lihat Detail &rarr;</a>
+                        </div>
+                    </div>
+                    <!-- Tambahkan Proyek Lainnya -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ====== BAGIAN KONTAK ====== -->
+        <section id="contact" class="py-20 reveal">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-12">Hubungi Saya</h2>
+                <div class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg">
+                    <form id="contact-form">
+                        <div id="form-message" class="mb-4 text-center hidden"></div>
+                        <div class="mb-4">
+                            <label for="name" class="block text-gray-700 font-semibold mb-2">Nama</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="block text-gray-700 font-semibold mb-2">Email</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="message" class="block text-gray-700 font-semibold mb-2">Pesan</label>
+                            <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="bg-blue-500 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-600 transition duration-300">Kirim Pesan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 [Nama Anda]. Dibuat dengan HTML, Tailwind CSS, dan JavaScript.</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPT JAVASCRIPT -->
+    <script src="Js/main.js"></script>
+</body>
 </html>
