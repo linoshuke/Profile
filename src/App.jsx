@@ -1,8 +1,10 @@
 import Header from './components/Header'
 import Hero from './components/Hero'
-import About from './components/About'
 import Projects from './components/Projects'
-import Contact from './components/Contact'
+import Clients from './components/Clients'
+import Services from './components/Services'
+import About from './components/About'
+import Certificates from './components/Certificates'
 import Footer from './components/Footer'
 
 function App() {
@@ -11,9 +13,11 @@ function App() {
             <Header />
             <main>
                 <Hero />
-                <About />
                 <Projects />
-                <Contact />
+                <Clients />
+                <Services />
+                <About />
+                <Certificates />
             </main>
             <Footer />
         </>
