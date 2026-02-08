@@ -1,28 +1,25 @@
 {
-  "name": "native-tailwind",
+  "name": "profile-react",
+  "private": true,
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npx tailwindcss -i ./public/src/input.css -o ./public/src/output.css --watch"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
   "devDependencies": {
-    "tailwindcss": "^4.1.11"
+    "@vitejs/plugin-react": "^4.5.0",
+    "tailwindcss": "^4.1.11",
+    "@tailwindcss/vite": "^4.1.11",
+    "vite": "^6.3.5"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/linoshuke/Native-Tailwind.git"
-  },
-  "bugs": {
-    "url": "https://github.com/linoshuke/Native-Tailwind/issues"
-  },
-  "homepage": "https://github.com/linoshuke/Native-Tailwind#readme",
-  "dependencies": {
-    "@tailwindcss/cli": "^4.1.11"
+    "url": "git+https://github.com/linoshuke/Profile.git"
   }
 }
