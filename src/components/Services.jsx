@@ -49,9 +49,9 @@ function Services() {
             className={`py-24 bg-white transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
         >
             <div className="container mx-auto px-6">
-                <h2 className="section-title text-[var(--primary)]">Layanan</h2>
-                <div className="w-20 h-1.5 bg-[var(--accent)] mx-auto mb-4 rounded-full"></div>
-                <p className="section-subtitle text-slate-600">
+                <h2 className="text-4xl font-bold text-center mb-4 text-navy">Layanan</h2>
+                <div className="w-20 h-1.5 bg-softblue mx-auto mb-4 rounded-full"></div>
+                <p className="text-slate-600 text-center max-w-[600px] mx-auto mb-12">
                     Solusi terbaik untuk bisnis, brand, institusi, atau organisasi Anda
                 </p>
 
@@ -62,12 +62,12 @@ function Services() {
                             className="glass-card p-8 text-center group border border-slate-100 hover:bg-white transition-all duration-300"
                         >
                             {/* Icon */}
-                            <div className="service-icon mx-auto group-hover:scale-110 group-hover:bg-[var(--accent)]/10 transition-all duration-300">
-                                <span className="text-2xl">{service.icon}</span>
+                            <div className="w-16 h-16 flex items-center justify-center rounded-2xl bg-gradient-to-br from-softblue to-softblue-dark text-white mb-4 mx-auto text-3xl group-hover:scale-110 group-hover:shadow-lg transition-all duration-300">
+                                <span>{service.icon}</span>
                             </div>
 
                             {/* Title */}
-                            <h3 className="text-xl font-bold mb-3 text-[var(--primary)] group-hover:text-[var(--accent)] transition-colors">
+                            <h3 className="text-xl font-bold mb-3 text-navy group-hover:text-softblue transition-colors">
                                 {service.title}
                             </h3>
 

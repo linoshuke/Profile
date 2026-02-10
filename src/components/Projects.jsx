@@ -67,9 +67,9 @@ function Projects() {
             className={`py-24 bg-white transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
         >
             <div className="container mx-auto px-6">
-                <h2 className="section-title text-[var(--primary)]">Projects</h2>
-                <div className="w-20 h-1.5 bg-[var(--accent)] mx-auto mb-4 rounded-full"></div>
-                <p className="section-subtitle text-slate-600">
+                <h2 className="text-4xl font-bold text-center mb-4 text-navy">Projects</h2>
+                <div className="w-20 h-1.5 bg-softblue mx-auto mb-4 rounded-full"></div>
+                <p className="text-slate-600 text-center max-w-[600px] mx-auto mb-12">
                     Beberapa proyek yang telah saya kerjakan untuk berbagai klien dan institusi
                 </p>
 
@@ -81,14 +81,14 @@ function Projects() {
                         >
                             {/* Project Image */}
                             <div className="relative h-48 bg-slate-50 overflow-hidden">
-                                <div className="absolute inset-0 bg-gradient-to-br from-[var(--primary)]/5 to-[var(--accent)]/10 flex items-center justify-center">
+                                <div className="absolute inset-0 bg-gradient-to-br from-navy/5 to-softblue/10 flex items-center justify-center">
                                     <span className="text-6xl opacity-30 transform group-hover:scale-110 transition-transform duration-500">💻</span>
                                 </div>
                                 {/* Hover Overlay */}
-                                <div className="absolute inset-0 bg-[var(--primary)]/90 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                                <div className="absolute inset-0 bg-navy/90 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-all duration-300">
                                     <a
                                         href={project.demoLink}
-                                        className="w-12 h-12 rounded-full bg-[var(--accent)] text-white flex items-center justify-center hover:scale-110 transition-transform"
+                                        className="w-12 h-12 rounded-full bg-softblue text-white flex items-center justify-center hover:scale-110 transition-transform"
                                         title="Live Demo"
                                     >
                                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -109,7 +109,7 @@ function Projects() {
 
                             {/* Project Info */}
                             <div className="p-6">
-                                <h3 className="text-xl font-bold mb-2 text-[var(--primary)] group-hover:text-[var(--accent)] transition-colors">
+                                <h3 className="text-xl font-bold mb-2 text-navy group-hover:text-softblue transition-colors">
                                     {project.title}
                                 </h3>
                                 <p className="text-slate-600 text-sm mb-4 line-clamp-2">
@@ -120,7 +120,7 @@ function Projects() {
                                     {project.tech.map((tech, index) => (
                                         <span
                                             key={index}
-                                            className="text-xs px-3 py-1 rounded-full bg-[var(--accent)]/10 text-[var(--accent)] font-medium border border-[var(--accent)]/10"
+                                            className="text-xs px-3 py-1 rounded-full bg-softblue/10 text-softblue font-medium border border-softblue/10"
                                         >
                                             {tech}
                                         </span>

@@ -55,9 +55,9 @@ function Certificates() {
             className={`py-24 bg-white transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
         >
             <div className="container mx-auto px-6">
-                <h2 className="section-title text-[var(--primary)]">Sertifikat</h2>
-                <div className="w-20 h-1.5 bg-[var(--accent)] mx-auto mb-4 rounded-full"></div>
-                <p className="section-subtitle text-slate-600">
+                <h2 className="text-4xl font-bold text-center mb-4 text-navy">Sertifikat</h2>
+                <div className="w-20 h-1.5 bg-softblue mx-auto mb-4 rounded-full"></div>
+                <p className="text-slate-600 text-center max-w-[600px] mx-auto mb-12">
                     Sertifikasi dan pencapaian yang telah saya raih
                 </p>
 
@@ -65,16 +65,16 @@ function Certificates() {
                     {certificates.map((cert) => (
                         <div
                             key={cert.id}
-                            className="certificate-badge flex items-center gap-4 group cursor-pointer border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300"
+                            className="bg-white border border-navy/5 rounded-xl p-6 transition-all duration-300 shadow-[0_4px_15px_rgba(0,0,0,0.02)] hover:border-softblue hover:bg-offwhite hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(27,38,59,0.08)] flex items-center gap-4 group cursor-pointer"
                         >
                             {/* Icon */}
-                            <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[var(--primary)]/5 to-[var(--accent)]/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:bg-[var(--accent)]/10 transition-all duration-300">
+                            <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-navy/5 to-softblue/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:bg-softblue/10 transition-all duration-300">
                                 <span className="text-2xl">{cert.icon}</span>
                             </div>
 
                             {/* Info */}
                             <div className="flex-1">
-                                <h3 className="font-bold text-[var(--primary)] group-hover:text-[var(--accent)] transition-colors">
+                                <h3 className="font-bold text-navy group-hover:text-softblue transition-colors">
                                     {cert.name}
                                 </h3>
                                 <p className="text-sm text-slate-500 font-medium">

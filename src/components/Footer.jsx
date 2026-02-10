@@ -60,7 +60,7 @@ function Footer() {
                             href={social.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="social-icon shadow-sm hover:shadow-md"
+                            className="w-11 h-11 flex items-center justify-center rounded-full bg-white border border-navy/10 text-navy transition-all duration-300 hover:bg-navy hover:text-white hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(27,38,59,0.2)] shadow-sm hover:shadow-md"
                             title={social.name}
                         >
                             {social.icon}
@@ -69,12 +69,12 @@ function Footer() {
                 </div>
 
                 {/* Divider */}
-                <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[var(--primary)]/10 to-transparent mx-auto mb-8" />
+                <div className="w-24 h-1 bg-gradient-to-r from-transparent via-navy/10 to-transparent mx-auto mb-8" />
 
                 {/* Copyright */}
                 <div className="text-center">
                     <p className="text-slate-500 text-sm font-medium">
-                        © 2024 - {currentYear} <span className="text-[var(--primary)] font-bold">Nama Anda</span>
+                        © 2024 - {currentYear} <span className="text-navy font-bold">Nama Anda</span>
                     </p>
                     <p className="text-slate-400 text-xs mt-2 font-medium">
                         Dibuat dengan ❤️ menggunakan React & Tailwind CSS

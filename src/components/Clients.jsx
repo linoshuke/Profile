@@ -52,12 +52,12 @@ function Clients() {
         <section
             id="clients"
             ref={ref}
-            className={`py-24 bg-[var(--bg-light)] transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+            className={`py-24 bg-offwhite transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
         >
             <div className="container mx-auto px-6">
-                <h2 className="section-title text-[var(--primary)]">Klien & Institusi</h2>
-                <div className="w-20 h-1.5 bg-[var(--accent)] mx-auto mb-4 rounded-full"></div>
-                <p className="section-subtitle text-slate-600">
+                <h2 className="text-4xl font-bold text-center mb-4 text-navy">Klien & Institusi</h2>
+                <div className="w-20 h-1.5 bg-softblue mx-auto mb-4 rounded-full"></div>
+                <p className="text-slate-600 text-center max-w-[600px] mx-auto mb-12">
                     Berbagai lembaga dan institusi yang telah mempercayakan proyek mereka kepada saya
                 </p>
 
@@ -69,16 +69,16 @@ function Clients() {
                         >
                             <div className="flex items-start gap-4">
                                 {/* Icon */}
-                                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[var(--primary)]/5 to-[var(--accent)]/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:bg-[var(--accent)]/10 transition-all duration-300">
+                                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-navy/5 to-softblue/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:bg-softblue/10 transition-all duration-300">
                                     <span className="text-2xl">🏢</span>
                                 </div>
 
                                 {/* Info */}
                                 <div className="flex-1">
-                                    <h3 className="text-lg font-bold text-[var(--primary)] group-hover:text-[var(--accent)] transition-colors">
+                                    <h3 className="text-lg font-bold text-navy group-hover:text-softblue transition-colors">
                                         {client.name}
                                     </h3>
-                                    <p className="text-sm text-[var(--accent)] font-medium mb-1">
+                                    <p className="text-sm text-softblue font-medium mb-1">
                                         {client.type}
                                     </p>
                                     <p className="text-sm text-slate-600">
