@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Login — Portfolio</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script defer src="/__/firebase/12.14.0/firebase-app-compat.js"></script>
+<script defer src="/__/firebase/12.14.0/firebase-firestore-compat.js"></script>
+<script defer src="/__/firebase/init.js?useEmulator=true"></script>
+<style>
+  .toast { position:fixed; bottom:24px; right:24px; padding:12px 20px; border-radius:8px; color:white; font-size:14px; font-weight:500; z-index:9999; opacity:0; transform:translateY(20px); transition:all .3s; pointer-events:none; }
+  .toast.show { opacity:1; transform:translateY(0); }
+  .toast.success { background:#059669; }
+  .toast.error { background:#dc2626; }
+</style>
+</head>
+<body class="bg-background min-h-screen flex items-center justify-center" style="background:#f8f9ff">
+<div id="toast" class="toast"></div>
+<div class="w-full max-w-md mx-4">
+  <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-8">
+    <div class="text-center mb-8">
+      <div class="w-16 h-16 bg-indigo-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+        <span class="material-symbols-outlined text-indigo-600 text-3xl">lock</span>
+      </div>
+      <h1 class="text-2xl font-bold text-slate-900">Admin Access</h1>
+      <p class="text-sm text-slate-500 mt-1">Portfolio Manager</p>
+    </div>
+    <form id="loginForm" class="space-y-4" onsubmit="handleLogin(event)">
+      <div>
+        <label class="block text-sm font-medium text-slate-700 mb-1">Password</label>
+        <input type="password" id="password" required
+          class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
+          placeholder="Enter admin password"/>
+      </div>
+      <button type="submit" id="loginBtn"
+        class="w-full py-2.5 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors flex items-center justify-center gap-2">
+        <span>Sign In</span>
+      </button>
+    </form>
+    <p class="text-xs text-slate-400 text-center mt-6">
+      First time? Enter any password — it will be saved to Firestore.
+    </p>
+  </div>
+</div>
+<script src="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,200..200&display=swap" rel="stylesheet"></script>
+<script>
+const toast = document.getElementById('toast');
+function showToast(msg, type='success') { toast.textContent=msg; toast.className='toast '+type+' show'; setTimeout(()=>toast.classList.remove('show'),3000); }
+
+document.addEventListener('DOMContentLoaded', () => {
+  // If already authenticated, go straight to dashboard
+  if (sessionStorage.getItem('admin_auth') === '1') {
+    window.location.href = 'dashboard.html';
+  }
+});
+
+async function handleLogin(e) {
+  e.preventDefault();
+  const btn = document.getElementById('loginBtn');
+  const pw = document.getElementById('password').value.trim();
+  if (!pw) return;
+  btn.disabled = true; btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-lg">sync</span> Verifying...';
+
+  try {
+    await new Promise((resolve, reject) => {
+      const check = () => {
+        if (typeof firebase !== 'undefined' && firebase.app()) resolve();
+        else setTimeout(check, 200);
+      };
+      check();
+    });
+    const db = firebase.firestore();
+    const doc = await db.collection('admin').doc('auth').get();
+
+    if (doc.exists && doc.data().password) {
+      if (pw === doc.data().password) {
+        sessionStorage.setItem('admin_auth', '1');
+        showToast('Access granted!');
+        setTimeout(() => window.location.href = 'dashboard.html', 500);
+      } else {
+        showToast('Wrong password', 'error');
+        btn.disabled = false; btn.innerHTML = '<span>Sign In</span>';
+      }
+    } else {
+      // First time — save password
+      await db.collection('admin').doc('auth').set({ password: pw });
+      sessionStorage.setItem('admin_auth', '1');
+      showToast('Password saved! Redirecting...');
+      setTimeout(() => window.location.href = 'dashboard.html', 500);
+    }
+  } catch (err) {
+    console.error(err);
+    showToast('Error: ' + err.message, 'error');
+    btn.disabled = false; btn.innerHTML = '<span>Sign In</span>';
+  }
+}
+</script>
+</body></html>

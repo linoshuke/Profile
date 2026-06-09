@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tech Stack - Portfolio Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,200..200&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script defer src="/__/firebase/12.14.0/firebase-app-compat.js"></script>
+<script defer src="/__/firebase/12.14.0/firebase-firestore-compat.js"></script>
+<script defer src="/__/firebase/init.js?useEmulator=true"></script>
+<script id="tailwind-config">
+tailwind.config={darkMode:"class",theme:{extend:{colors:{tertiary:"#00524b","on-primary-container":"#dad7ff","tertiary-container":"#006c63","on-primary-fixed-variant":"#3323cc","on-secondary-container":"#5c647a","secondary-fixed-dim":"#bec6e0","surface-container":"#e5eeff","on-tertiary-container":"#81eddf","inverse-on-surface":"#eaf1ff","on-primary-fixed":"#0f0069","surface-container-high":"#dce9ff","on-error-container":"#93000a","primary-container":"#4f46e5","primary-fixed-dim":"#c3c0ff","surface-dim":"#cbdbf5","on-tertiary-fixed":"#00201d","surface-container-highest":"#d3e4fe",secondary:"#565e74","error-container":"#ffdad6","on-surface":"#0b1c30",outline:"#777587","surface-container-low":"#eff4ff","surface-variant":"#d3e4fe","surface-tint":"#4d44e3","primary-fixed":"#e2dfff","on-background":"#0b1c30",error:"#ba1a1a","on-secondary-fixed":"#131b2e",background:"#f8f9ff","surface-bright":"#f8f9ff","on-secondary-fixed-variant":"#3f465c","on-primary":"#ffffff","inverse-primary":"#c3c0ff","on-error":"#ffffff","on-surface-variant":"#464555","tertiary-fixed":"#89f5e7","tertiary-fixed-dim":"#6bd8cb","secondary-fixed":"#dae2fd","inverse-surface":"#213145","secondary-container":"#dae2fd",surface:"#f8f9ff","on-tertiary":"#ffffff","on-tertiary-fixed-variant":"#005049","on-secondary":"#ffffff",primary:"#3525cd","outline-variant":"#c7c4d8","surface-container-lowest":"#ffffff"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"sidebar-width":"280px","container-padding":"32px",gutter:"24px",base:"4px","card-gap":"20px"},fontFamily:{"body-lg":["Inter"],"label-sm":["Inter"],h2:["Inter"],h3:["Inter"],h1:["Inter"],"body-md":["Inter"]},fontSize:{"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}],"label-sm":["12px",{lineHeight:"16px",letterSpacing:"0.02em",fontWeight:"500"}],h2:["24px",{lineHeight:"32px",letterSpacing:"-0.01em",fontWeight:"600"}],h3:["20px",{lineHeight:"28px",fontWeight:"600"}],h1:["30px",{lineHeight:"36px",letterSpacing:"-0.02em",fontWeight:"600"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}]}}}}</script>
+<style>.material-symbols-outlined{font-variation-settings:'FILL'0,'wght'400,'GRAD'0,'opsz'24}.toast{position:fixed;bottom:24px;right:24px;padding:12px 20px;border-radius:8px;color:white;font-size:14px;font-weight:500;z-index:9999;opacity:0;transform:translateY(20px);transition:all .3s;pointer-events:none}.toast.show{opacity:1;transform:translateY(0)}.toast.success{background:#059669}.toast.error{background:#dc2626}.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;display:none;align-items:center;justify-content:center}.modal-overlay.open{display:flex}.modal-content{background:white;border-radius:12px;max-width:480px;width:90%;padding:32px}</style>
+</head>
+<body class="bg-background text-on-background font-body-lg text-body-lg min-h-screen flex">
+<div id="toast" class="toast"></div>
+<div id="skillModal" class="modal-overlay"><div class="modal-content"><div class="flex items-center justify-between mb-6"><h2 class="font-h2 text-h2 text-on-surface" id="modalTitleSkill">Add New Skill</h2><button class="text-slate-400 hover:text-slate-700" onclick="closeSkillModal()"><span class="material-symbols-outlined">close</span></button></div>
+<form id="skillForm" class="space-y-4"><input type="hidden" id="editSkillId"/>
+<div><label class="font-label-sm text-label-sm text-on-surface-variant" for="skillName">Skill Name</label><input class="w-full border border-outline-variant rounded-lg px-4 py-2.5 bg-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none" id="skillName" placeholder="e.g. React" required/></div>
+<div><label class="font-label-sm text-label-sm text-on-surface-variant" for="skillCategory">Category</label><select class="w-full border border-outline-variant rounded-lg px-4 py-2.5 bg-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none" id="skillCategory"><option value="Frontend">Frontend</option><option value="Backend">Backend</option><option value="Tools">Tools</option></select></div>
+</form>
+<div class="flex justify-end gap-3 mt-6 pt-4 border-t border-outline-variant"><button class="px-5 py-2 rounded-lg border border-outline text-secondary hover:bg-surface-variant transition-colors" onclick="closeSkillModal()">Cancel</button><button class="px-5 py-2 rounded-lg bg-primary text-on-primary hover:bg-primary/90 transition-colors flex items-center gap-2" onclick="saveSkill()"><span class="material-symbols-outlined text-[18px]">add</span> Add Skill</button></div></div></div>
+<nav class="fixed left-0 top-0 h-full w-[280px] border-r border-slate-800 shadow-xl bg-slate-900 flex flex-col overflow-y-auto z-50">
+<div class="text-white text-xl font-bold tracking-tight px-6 py-8 flex flex-col">Portfolio Manager<span class="text-sm font-normal text-slate-400 mt-1">Sophisticated Operator</span></div>
+<div class="px-6 mb-6"><a href="project.html" class="block w-full py-2 bg-indigo-500/10 text-indigo-400 rounded-lg font-['Inter'] text-sm font-medium border border-indigo-500/20 hover:bg-indigo-500/20 transition-colors text-center">New Project</a></div>
+<ul class="flex-1 font-['Inter'] text-sm font-medium tracking-wide flex flex-col">
+<li><a class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:text-white hover:bg-slate-800/30 transition-colors hover:bg-slate-800/50 transition-all duration-200" href="dashboard.html"><span class="material-symbols-outlined">dashboard</span> Dashboard</a></li>
+<li><a class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:text-white hover:bg-slate-800/30 transition-colors hover:bg-slate-800/50 transition-all duration-200" href="contact.html"><span class="material-symbols-outlined">mail</span> Contact</a></li>
+<li><a class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:text-white hover:bg-slate-800/30 transition-colors hover:bg-slate-800/50 transition-all duration-200" href="project.html"><span class="material-symbols-outlined">folder_special</span> Projects</a></li>
+<li><a class="flex items-center gap-3 px-6 py-3 border-l-4 border-indigo-500 bg-slate-800/50 text-white transition-all duration-200" href="techstack.html"><span class="material-symbols-outlined" style="font-variation-settings:'FILL'1">code</span> Tech Stack</a></li>
+</ul>
+<div class="mt-auto border-t border-slate-800"><ul class="font-['Inter'] text-sm font-medium tracking-wide py-4">
+<li><a class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:text-white hover:bg-slate-800/30 transition-all duration-200" href="/"><span class="material-symbols-outlined">public</span> View Site</a></li>
+<li><a class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:text-red-400 hover:bg-slate-800/30 transition-all duration-200 cursor-pointer" onclick="logout()"><span class="material-symbols-outlined">logout</span> Logout</a></li>
+</ul></div>
+</nav>
+<div class="flex-1 ml-[280px] flex flex-col min-h-screen">
+<header class="fixed top-0 right-0 left-[280px] z-30 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm flex justify-between items-center h-16 px-8 font-inter text-base font-medium">
+<div class="flex-1 flex items-center"><div class="relative w-64 focus-within:ring-2 focus-within:ring-indigo-500 rounded-lg"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span><input class="w-full pl-10 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border-none rounded-lg text-sm focus:outline-none focus:ring-0 text-slate-500 dark:text-slate-400" placeholder="Search skills..." type="text" id="searchSkill" oninput="filterSkills()"/></div></div>
+<div class="flex items-center gap-4 text-indigo-600 dark:text-indigo-400"><button class="p-2 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors"><span class="material-symbols-outlined">notifications</span></button><div class="w-8 h-8 rounded-full overflow-hidden border border-slate-200 ml-2"><img alt="User" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyCMEqDWtLnvIOlcjnFi61cPZLf5AhQnbo2OfRlIaLwkFoZtxmzrHn1z8BC9ANWpWK05zeh8Lh0Tm__UluKgGiC_axtUgSRnG-JNPoVfL_zg4WFv5k9uTwvs9rktgMbez3T0Os2DygCkVO1h4PL7rFylPa-yJMKWGVZkZHETKh9Byw7YeoMPHE9hAWDDvh2h3CLFXuJHhRz6KWtE49TKtJLcPDNMDQGnMyOJ9IbmpSfHePgsToilC3Z201WdEQF0P8CqgMWctrPQ"/></div></div>
+</header>
+<main class="flex-1 mt-16 p-container-padding bg-background">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+<div><h1 class="font-h1 text-h1 text-on-background">Tech Stack</h1><p class="font-body-md text-body-md text-on-surface-variant mt-1">Manage and categorize your technical proficiencies.</p></div>
+<button class="bg-primary text-on-primary px-5 py-2.5 rounded-lg flex items-center gap-2 hover:bg-primary/90 transition-colors shadow-sm font-label-sm text-label-sm" onclick="openSkillModal()"><span class="material-symbols-outlined" style="font-size:18px">add</span> Add New Skill</button>
+</div>
+<div class="bg-surface border border-outline-variant rounded-xl p-4 mb-8 flex flex-wrap gap-4 items-center justify-between shadow-[0_2px_8px_-2px_rgba(0,0,0,.05)]">
+<div class="flex gap-2">
+<button class="px-4 py-2 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm" onclick="filterByCategory('All')" id="filterAll">All</button>
+<button class="px-4 py-2 rounded-lg bg-surface border border-outline-variant text-on-surface font-label-sm text-label-sm hover:bg-surface-container transition-colors" onclick="filterByCategory('Frontend')" id="filterFrontend">Frontend</button>
+<button class="px-4 py-2 rounded-lg bg-surface border border-outline-variant text-on-surface font-label-sm text-label-sm hover:bg-surface-container transition-colors" onclick="filterByCategory('Backend')" id="filterBackend">Backend</button>
+<button class="px-4 py-2 rounded-lg bg-surface border border-outline-variant text-on-surface font-label-sm text-label-sm hover:bg-surface-container transition-colors" onclick="filterByCategory('Tools')" id="filterTools">Tools</button>
+</div>
+</div>
+<div id="categoryGrid" class="grid grid-cols-1 lg:grid-cols-3 gap-gutter"><div class="text-center py-12 col-span-full text-on-surface-variant"><span class="material-symbols-outlined text-4xl block mb-2">hourglass_empty</span>Loading skills...</div></div>
+</main>
+</div>
+<script>
+function showToast(m,t='success'){const e=document.getElementById('toast');e.textContent=m;e.className='toast '+t+' show';setTimeout(()=>e.classList.remove('show'),3000)}
+function logout(){sessionStorage.removeItem('admin_auth');window.location.href='index.html'}
+let db,allSkills=[],currentFilter='All';
+document.addEventListener('DOMContentLoaded',function(){
+  if(sessionStorage.getItem('admin_auth')!=='1'){window.location.href='index.html';return}
+  try{db=firebase.firestore();loadSkills()}catch(e){showToast('Firebase error','error')}
+});
+function openSkillModal(id){
+  document.getElementById('skillModal').classList.add('open');
+  if(id){const s=allSkills.find(x=>x.id===id);if(s){document.getElementById('editSkillId').value=id;document.getElementById('skillName').value=s.name;document.getElementById('skillCategory').value=s.category}document.querySelector('#skillModal .bg-primary').innerHTML='<span class="material-symbols-outlined text-[18px]">save</span> Update'}
+  else{document.getElementById('skillForm').reset();document.getElementById('editSkillId').value='';document.querySelector('#skillModal .bg-primary').innerHTML='<span class="material-symbols-outlined text-[18px]">add</span> Add Skill'}
+}
+function openSkillModalForCategory(c){document.getElementById('skillCategory').value=c;openSkillModal()}
+function closeSkillModal(){document.getElementById('skillModal').classList.remove('open')}
+function saveSkill(){
+  if(!db)return;
+  const eid=document.getElementById('editSkillId').value,n=document.getElementById('skillName').value.trim(),c=document.getElementById('skillCategory').value;
+  if(!n){showToast('Name required','error');return}
+  const data={name:n,category:c,updatedAt:firebase.firestore.FieldValue.serverTimestamp()};
+  const p=eid?db.collection('techstack').doc(eid).update(data):db.collection('techstack').add({...data,createdAt:firebase.firestore.FieldValue.serverTimestamp()});
+  p.then(()=>{showToast(eid?'Updated!':'Added!');closeSkillModal();loadSkills()}).catch(e=>{console.error(e);showToast('Error saving','error')});
+}
+function deleteSkill(id){if(!confirm('Delete?'))return;db.collection('techstack').doc(id).delete().then(()=>{showToast('Deleted');loadSkills()}).catch(e=>{console.error(e);showToast('Error deleting','error')})}
+function loadSkills(){
+  if(!db)return;
+  db.collection('techstack').orderBy('createdAt','asc').get().then(s=>{allSkills=[];s.forEach(d=>allSkills.push({id:d.id,...d.data()}));renderSkills()}).catch(e=>{console.error(e);document.getElementById('categoryGrid').innerHTML='<div class="col-span-full text-center py-12 text-error">Error loading</div>'});
+}
+function renderSkills(){
+  const grid=document.getElementById('categoryGrid'),filt=currentFilter==='All'?allSkills:allSkills.filter(s=>s.category===currentFilter);
+  const cats=['Frontend','Backend','Tools'],icons={Frontend:'desktop_windows',Backend:'dns',Tools:'build'},descs={Frontend:'UI & Client-side',Backend:'Server & Database',Tools:'DevOps & Utilities'};
+  let html='';
+  for(const cat of cats){
+    if(currentFilter!=='All'&&currentFilter!==cat)continue;
+    const skills=filt.filter(s=>s.category===cat),tags=skills.map(s=>'<div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-secondary-container/50 border border-secondary-container rounded-full group hover:bg-secondary-container transition-colors"><span class="font-label-sm text-label-sm text-on-secondary-fixed-variant">'+esc(s.name)+'</span><button onclick="deleteSkill(\''+s.id+'\')" class="material-symbols-outlined text-[14px] text-on-secondary-fixed-variant opacity-50 group-hover:opacity-100 hover:text-error">close</button></div>').join('');
+    html+='<div class="bg-surface border border-outline-variant rounded-xl p-6 shadow-[0_4px_12px_-4px_rgba(0,0,0,.05)] hover:shadow-[0_8px_24px_-8px_rgba(0,0,0,.1)] transition-shadow duration-300 flex flex-col"><div class="flex items-center gap-3 mb-6 pb-4 border-b border-surface-variant"><div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary"><span class="material-symbols-outlined">'+icons[cat]+'</span></div><div><h2 class="font-h3 text-h3 text-on-surface">'+cat+'</h2><p class="font-label-sm text-label-sm text-outline">'+descs[cat]+'</p></div></div><div class="flex flex-wrap gap-2">'+(tags||'<p class="text-on-surface-variant text-sm italic">No skills added yet</p>')+'<button class="inline-flex items-center gap-1 px-3 py-1.5 border border-dashed border-outline rounded-full text-outline hover:text-primary hover:border-primary transition-colors" onclick="openSkillModalForCategory(\''+cat+'\')"><span class="material-symbols-outlined text-[14px]">add</span><span class="font-label-sm text-label-sm">Add</span></button></div></div>'
+  }
+  grid.innerHTML=html||'<div class="col-span-full text-center py-12 text-on-surface-variant">No skills match filter.</div>';
+}
+function filterByCategory(c){currentFilter=c;document.querySelectorAll('[id^="filter"]').forEach(b=>{b.className='px-4 py-2 rounded-lg bg-surface border border-outline-variant text-on-surface font-label-sm text-label-sm hover:bg-surface-container transition-colors'});const btn=document.getElementById('filter'+c);if(btn)btn.className='px-4 py-2 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm';renderSkills()}
+function filterSkills(){const q=document.getElementById('searchSkill').value.toLowerCase();if(!q){renderSkills();return}
+  const grid=document.getElementById('categoryGrid'),filt=allSkills.filter(s=>s.name.toLowerCase().includes(q)),icons={Frontend:'desktop_windows',Backend:'dns',Tools:'build'},descs={Frontend:'UI & Client-side',Backend:'Server & Database',Tools:'DevOps & Utilities'};
+  let html='';
+  for(const cat of ['Frontend','Backend','Tools']){const skills=filt.filter(s=>s.category===cat);if(!skills.length)continue;const tags=skills.map(s=>'<div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-secondary-container/50 border border-secondary-container rounded-full group hover:bg-secondary-container transition-colors"><span class="font-label-sm text-label-sm text-on-secondary-fixed-variant">'+esc(s.name)+'</span><button onclick="deleteSkill(\''+s.id+'\')" class="material-symbols-outlined text-[14px] text-on-secondary-fixed-variant opacity-50 group-hover:opacity-100 hover:text-error">close</button></div>').join('');html+='<div class="bg-surface border border-outline-variant rounded-xl p-6 shadow-[0_4px_12px_-4px_rgba(0,0,0,.05)] hover:shadow-[0_8px_24px_-8px_rgba(0,0,0,.1)] transition-shadow duration-300 flex flex-col"><div class="flex items-center gap-3 mb-6 pb-4 border-b border-surface-variant"><div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary"><span class="material-symbols-outlined">'+icons[cat]+'</span></div><div><h2 class="font-h3 text-h3 text-on-surface">'+cat+'</h2><p class="font-label-sm text-label-sm text-outline">'+descs[cat]+'</p></div></div><div class="flex flex-wrap gap-2">'+tags+'</div></div>'||'<div class="col-span-full text-center py-12 text-on-surface-variant">No skills match.</div>'}
+  grid.innerHTML=html;
+}
+function esc(t){const d=document.createElement('div');d.textContent=t;return d.innerHTML}
+</script>
+</body></html>
