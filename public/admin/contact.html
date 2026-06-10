@@ -1,100 +1,334 @@
-<!DOCTYPE html>
-<html lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Contact - Portfolio Admin</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,200..200&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-<script defer src="/__/firebase/12.14.0/firebase-app-compat.js"></script>
-<script defer src="/__/firebase/12.14.0/firebase-firestore-compat.js"></script>
-<script defer src="/__/firebase/init.js?useEmulator=true"></script>
-<style>.material-symbols-outlined{font-family:'Material Symbols Outlined';font-weight:400;font-style:normal;font-size:24px;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga'}.toast{position:fixed;bottom:24px;right:24px;padding:12px 20px;border-radius:8px;color:white;font-size:14px;font-weight:500;z-index:9999;opacity:0;transform:translateY(20px);transition:all .3s;pointer-events:none}.toast.show{opacity:1;transform:translateY(0)}.toast.success{background:#059669}.toast.error{background:#dc2626}</style>
-<script id="tailwind-config">
-tailwind.config={darkMode:"class",theme:{extend:{colors:{tertiary:"#00524b","on-primary-container":"#dad7ff","tertiary-container":"#006c63","on-primary-fixed-variant":"#3323cc","on-secondary-container":"#5c647a","secondary-fixed-dim":"#bec6e0","surface-container":"#e5eeff","on-tertiary-container":"#81eddf","inverse-on-surface":"#eaf1ff","on-primary-fixed":"#0f0069","surface-container-high":"#dce9ff","on-error-container":"#93000a","primary-container":"#4f46e5","primary-fixed-dim":"#c3c0ff","surface-dim":"#cbdbf5","on-tertiary-fixed":"#00201d","surface-container-highest":"#d3e4fe",secondary:"#565e74","error-container":"#ffdad6","on-surface":"#0b1c30",outline:"#777587","surface-container-low":"#eff4ff","surface-variant":"#d3e4fe","surface-tint":"#4d44e3","primary-fixed":"#e2dfff","on-background":"#0b1c30",error:"#ba1a1a","on-secondary-fixed":"#131b2e",background:"#f8f9ff","surface-bright":"#f8f9ff","on-secondary-fixed-variant":"#3f465c","on-primary":"#ffffff","inverse-primary":"#c3c0ff","on-error":"#ffffff","on-surface-variant":"#464555","tertiary-fixed":"#89f5e7","tertiary-fixed-dim":"#6bd8cb","secondary-fixed":"#dae2fd","inverse-surface":"#213145","secondary-container":"#dae2fd",surface:"#f8f9ff","on-tertiary":"#ffffff","on-tertiary-fixed-variant":"#005049","on-secondary":"#ffffff",primary:"#3525cd","outline-variant":"#c7c4d8","surface-container-lowest":"#ffffff"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"sidebar-width":"280px","container-padding":"32px",gutter:"24px",base:"4px","card-gap":"20px"},fontFamily:{"body-lg":["Inter"],"label-sm":["Inter"],h2:["Inter"],h3:["Inter"],h1:["Inter"],"body-md":["Inter"]},fontSize:{"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}],"label-sm":["12px",{lineHeight:"16px",letterSpacing:"0.02em",fontWeight:"500"}],h2:["24px",{lineHeight:"32px",letterSpacing:"-0.01em",fontWeight:"600"}],h3:["20px",{lineHeight:"28px",fontWeight:"600"}],h1:["30px",{lineHeight:"36px",letterSpacing:"-0.02em",fontWeight:"600"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}]}}}}</script>
-</head>
-<body class="bg-background text-on-background min-h-screen flex font-body-lg text-body-lg">
-<div id="toast" class="toast"></div>
-<nav class="fixed left-0 top-0 h-full w-[280px] border-r border-slate-800 shadow-xl bg-slate-900 flex flex-col overflow-y-auto z-50">
-<div class="text-white text-xl font-bold tracking-tight px-6 py-8 flex flex-col">Portfolio Manager<span class="text-sm font-normal text-slate-400 mt-1">Sophisticated Operator</span></div>
-<div class="px-6 mb-6"><a href="project.html" class="block w-full py-2 bg-indigo-500/10 text-indigo-400 rounded-lg font-['Inter'] text-sm font-medium border border-indigo-500/20 hover:bg-indigo-500/20 transition-colors text-center">New Project</a></div>
-<ul class="flex-1 font-['Inter'] text-sm font-medium tracking-wide flex flex-col">
-<li><a class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:text-white hover:bg-slate-800/30 transition-colors hover:bg-slate-800/50 transition-all duration-200" href="dashboard.html"><span class="material-symbols-outlined">dashboard</span> Dashboard</a></li>
-<li><a class="flex items-center gap-3 px-6 py-3 border-l-4 border-indigo-500 bg-slate-800/50 text-white transition-all duration-200" href="contact.html"><span class="material-symbols-outlined" style="font-variation-settings:'FILL'1">mail</span> Contact</a></li>
-<li><a class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:text-white hover:bg-slate-800/30 transition-colors hover:bg-slate-800/50 transition-all duration-200" href="project.html"><span class="material-symbols-outlined">folder_special</span> Projects</a></li>
-<li><a class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:text-white hover:bg-slate-800/30 transition-colors hover:bg-slate-800/50 transition-all duration-200" href="techstack.html"><span class="material-symbols-outlined">code</span> Tech Stack</a></li>
-</ul>
-<div class="mt-auto border-t border-slate-800">
-<ul class="font-['Inter'] text-sm font-medium tracking-wide py-4">
-<li><a class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:text-white hover:bg-slate-800/30 transition-all duration-200" href="/"><span class="material-symbols-outlined">public</span> View Site</a></li>
-<li><a class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:text-red-400 hover:bg-slate-800/30 transition-all duration-200 cursor-pointer" onclick="logout()"><span class="material-symbols-outlined">logout</span> Logout</a></li>
-</ul>
-</div>
-</nav>
-<header class="fixed top-0 right-0 left-[280px] z-30 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm flex justify-between items-center h-16 px-8 font-inter text-base font-medium">
-<div class="flex items-center gap-6"><span class="font-bold text-indigo-600 dark:text-indigo-400">Portfolio Management</span><div class="relative flex items-center focus-within:ring-2 focus-within:ring-indigo-500 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 px-3 py-1.5 w-64"><span class="material-symbols-outlined text-slate-400 text-sm mr-2">search</span><input class="bg-transparent border-none outline-none text-sm w-full text-slate-700 dark:text-slate-300 placeholder-slate-400 focus:ring-0 p-0" placeholder="Search..." type="text"/></div></div>
-<div class="flex items-center gap-4"><button class="text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg p-2 transition-colors"><span class="material-symbols-outlined">notifications</span></button><img alt="User" class="w-8 h-8 rounded-full object-cover ml-2 border border-slate-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4m06Nyez4nZ9V3lwcCXOVX2_CnP7hdoLa3IFAVZvtSY7iypb72vNwZqwQQsMO57JLDihjYCXNV0oIa-2tkW8Fi_7cpg90zDRH7lSD9Xrmg3K0dLubcx32l-v8X3VdA9m0oTX6rtNr2ZxviLTCe-oMYJDj7uCpcrsyJSpWTghZ_bXHJxkiEtHhtXKLUYTi_CmZbKpWamaaAdDQa5TgyEn0SiUm1-PXhkZxJLI6Btw2E9yp9-17i4-aWzBMT53icVUtDfescCYm_w"/></div>
-</header>
-<main class="ml-[280px] pt-16 flex-1 p-container-padding">
-<div class="mb-8"><h1 class="font-h1 text-h1 text-on-background">Contact Information</h1><p class="font-body-md text-body-md text-on-surface-variant mt-2 max-w-2xl">Manage communication channels and social links displayed on your public portfolio.</p></div>
-<div class="grid grid-cols-1 xl:grid-cols-12 gap-gutter items-start">
-<div class="xl:col-span-7 space-y-gutter">
-<div class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm overflow-hidden">
-<div class="p-6 border-b border-outline-variant bg-surface-container-low/30"><h2 class="font-h3 text-h3 text-on-surface">Digital Presence</h2></div>
-<form class="p-6 space-y-gutter" id="contactForm">
-<div class="flex flex-col gap-2"><label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide" for="email">Primary Email Address</label><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-3 text-outline">mail</span><input class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-outline-variant bg-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-on-surface font-body-md transition-all shadow-sm" id="email" type="email"/></div></div>
-<hr class="border-outline-variant/50"/>
-<div class="space-y-4">
-<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">Social & Professional Links</h3>
-<div class="flex flex-col gap-2"><label class="sr-only" for="linkedin">LinkedIn URL</label><div class="relative flex items-center"><div class="absolute left-3 w-6 h-6 flex items-center justify-center bg-[#0A66C2] rounded text-white text-xs font-bold">in</div><input class="w-full pl-12 pr-4 py-2.5 rounded-lg border border-outline-variant bg-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-on-surface font-body-md transition-all shadow-sm" id="linkedin" placeholder="https://linkedin.com/in/username" type="url"/></div></div>
-<div class="flex flex-col gap-2"><label class="sr-only" for="github">GitHub URL</label><div class="relative flex items-center"><span class="absolute left-3 text-on-surface font-bold text-lg leading-none mt-1">GH</span><input class="w-full pl-12 pr-4 py-2.5 rounded-lg border border-outline-variant bg-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-on-surface font-body-md transition-all shadow-sm" id="github" placeholder="https://github.com/username" type="url"/></div></div>
-<div class="flex flex-col gap-2"><label class="sr-only" for="twitter">Twitter / X URL</label><div class="relative flex items-center"><span class="absolute left-3 text-on-surface font-bold text-lg leading-none mt-1">X</span><input class="w-full pl-12 pr-4 py-2.5 rounded-lg border border-outline-variant bg-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-on-surface font-body-md transition-all shadow-sm" id="twitter" placeholder="https://twitter.com/username" type="url"/></div></div>
-</div>
-</form>
-<div class="p-6 border-t border-outline-variant bg-surface-container-low/30 flex justify-end gap-3">
-<button class="px-5 py-2.5 rounded-lg border border-outline font-label-sm text-label-sm text-on-surface hover:bg-surface-variant transition-colors" type="button" onclick="loadContact()">Discard Changes</button>
-<button class="px-5 py-2.5 rounded-lg bg-primary font-label-sm text-label-sm text-on-primary shadow-sm transition-colors flex items-center gap-2" type="button" onclick="saveContact()"><span class="material-symbols-outlined text-sm">save</span> Save Configuration</button>
-</div>
-</div>
-</div>
-<div class="xl:col-span-5 sticky top-[100px]">
-<div class="flex items-center justify-between mb-4"><h3 class="font-h3 text-h3 text-on-surface">Live Preview</h3><span class="px-2.5 py-1 rounded-full bg-surface-container text-primary font-label-sm text-label-sm border border-primary-fixed-dim flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span> Real-time</span></div>
-<div class="rounded-xl border border-outline-variant bg-surface-container-lowest shadow-sm p-8 relative overflow-hidden flex flex-col items-center text-center">
-<div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image:radial-gradient(#000 1px,transparent 1px);background-size:20px 20px"></div>
-<div class="relative z-10 w-full max-w-sm">
-<div class="w-20 h-20 rounded-full bg-surface-container border-4 border-surface-container-lowest shadow mx-auto mb-6 overflow-hidden"><img alt="Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVhSXtKkLEfpCWZQnof5rv-vrxe3g0hPyzXEqOwwpl6Ex4S-Fb8BfskTHAchmHtSqeXG3Us-x4Hf9VVP33HuQTV86rSyUDY0_qTfn9XyXcpaU6_UQqkqEIaWCcvUTPKSKqjRgCRwODeDxelUvcch7oTnLJkRV233kKAo2YdFoViaMK6cRxqXiqpdNXJtmYJr15v_Uybxbd_zFBjspcF31UiAbcAggK25J3dTGN8g6OMfcx4DDKBF5vXsIdKb8oZTKk2ahi7Z42Nw"/></div>
-<h4 class="font-h2 text-h2 text-on-surface mb-2">Let's Connect</h4>
-<p class="font-body-md text-body-md text-on-surface-variant mb-8">I'm currently open to new opportunities and collaborations.</p>
-<div class="space-y-3">
-<a class="flex items-center justify-center gap-3 w-full py-3 px-4 rounded-lg bg-surface-container-low hover:bg-surface-container border border-outline-variant transition-colors group" href="#" id="previewEmail"><span class="material-symbols-outlined text-primary">mail</span><span class="font-label-sm text-label-sm text-on-surface group-hover:text-primary transition-colors" id="previewEmailText">your@email.com</span></a>
-<div class="flex justify-center gap-3 pt-4">
-<a class="w-12 h-12 flex items-center justify-center rounded-full bg-surface-container-low border border-outline-variant hover:border-primary hover:text-primary text-on-surface transition-all shadow-sm" href="#" id="previewLinkedin" target="_blank"><div class="w-5 h-5 flex items-center justify-center bg-current rounded-sm text-surface-container-lowest text-[10px] font-bold">in</div></a>
-<a class="w-12 h-12 flex items-center justify-center rounded-full bg-surface-container-low border border-outline-variant hover:border-primary hover:text-primary text-on-surface transition-all shadow-sm font-bold text-lg" href="#" id="previewGithub" target="_blank">GH</a>
-<a class="w-12 h-12 flex items-center justify-center rounded-full bg-surface-container-low border border-outline-variant hover:border-primary hover:text-primary text-on-surface transition-all shadow-sm font-bold text-lg" href="#" id="previewTwitter" target="_blank">X</a>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</main>
-<script>
-function showToast(m,t='success'){const e=document.getElementById('toast');e.textContent=m;e.className='toast '+t+' show';setTimeout(()=>e.classList.remove('show'),3000)}
-function logout(){sessionStorage.removeItem('admin_auth');window.location.href='index.html'}
-let db;
-document.addEventListener('DOMContentLoaded',function(){
-  if(sessionStorage.getItem('admin_auth')!=='1'){window.location.href='index.html';return}
-  try{db=firebase.firestore();loadContact()}catch(e){showToast('Firebase error','error')}
-});
-function loadContact(){
-  if(!db)return;
-  db.collection('admin').doc('contact').get().then(doc=>{if(doc.exists){const d=doc.data();document.getElementById('email').value=d.email||'';document.getElementById('linkedin').value=d.linkedin||'';document.getElementById('github').value=d.github||'';document.getElementById('twitter').value=d.twitter||'';updatePreview(d)}}).catch(e=>{console.error(e);showToast('Error loading','error')});
-}
-function updatePreview(d){document.getElementById('previewEmailText').textContent=d.email||'your@email.com';document.getElementById('previewEmail').href=d.email?'mailto:'+d.email:'#';document.getElementById('previewLinkedin').href=d.linkedin||'#';document.getElementById('previewGithub').href=d.github||'#';document.getElementById('previewTwitter').href=d.twitter||'#'}
-function saveContact(){
-  if(!db)return;
-  const data={email:document.getElementById('email').value,linkedin:document.getElementById('linkedin').value,github:document.getElementById('github').value,twitter:document.getElementById('twitter').value,updatedAt:firebase.firestore.FieldValue.serverTimestamp()};
-  db.collection('admin').doc('contact').set(data,{merge:true}).then(()=>{showToast('Contact saved!');updatePreview(data)}).catch(e=>{console.error(e);showToast('Error saving','error')});
-}
-</script>
-</body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Contact - Portfolio Admin</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <!-- Custom Tailwind Configuration -->
+    <script src="js/tailwind-config.js"></script>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Local Custom Stylesheet -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Firebase SDK Compat Services -->
+    <script defer src="/__/firebase/12.14.0/firebase-app-compat.js"></script>
+    <script defer src="/__/firebase/12.14.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+    <!-- Application Script -->
+    <script defer src="js/contact.js"></script>
+  </head>
+  <body class="bg-background text-on-background min-h-screen flex font-body-lg text-body-lg">
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Navigation Sidebar -->
+    <nav class="fixed left-0 top-0 h-full w-[280px] border-r border-slate-800 shadow-xl bg-slate-900 flex flex-col overflow-y-auto z-50">
+      <div class="text-white text-xl font-bold tracking-tight px-6 py-8 flex flex-col">
+        Portfolio Manager
+        <span class="text-sm font-normal text-slate-400 mt-1">Sophisticated Operator</span>
+      </div>
+      <div class="px-6 mb-6">
+        <a
+          href="project.html"
+          class="block w-full py-2 bg-indigo-500/10 text-indigo-400 rounded-lg font-inter text-sm font-medium border border-indigo-500/20 hover:bg-indigo-500/20 transition-colors text-center"
+        >
+          New Project
+        </a>
+      </div>
+      <ul class="flex-1 font-inter text-sm font-medium tracking-wide flex flex-col gap-1">
+        <li>
+          <a
+            class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:text-white hover:bg-slate-800/30 transition-all duration-200"
+            href="dashboard.html"
+          >
+            <!-- Icon Dashboard -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25a2.25 2.25 0 0 1 13.5 18v-2.25Z" />
+            </svg>
+            Dashboard
+          </a>
+        </li>
+        <li>
+          <a
+            class="flex items-center gap-3 px-6 py-3 border-l-4 border-indigo-500 bg-slate-800/50 text-white transition-all duration-200"
+            href="contact.html"
+          >
+            <!-- Icon Mail (Filled) -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5 text-indigo-400">
+              <path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a1.35 1.35 0 0 1-1.414 0L1.5 8.67Z" />
+              <path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z" />
+            </svg>
+            Contact
+          </a>
+        </li>
+        <li>
+          <a
+            class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:text-white hover:bg-slate-800/30 transition-all duration-200"
+            href="project.html"
+          >
+            <!-- Icon Projects -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 13.5h3.86a2.25 2.25 0 0 1 2.008 1.24l.885 1.77a2.25 2.25 0 0 0 2.007 1.24h1.98a2.25 2.25 0 0 0 2.007-1.24l.885-1.77a2.25 2.25 0 0 1 2.007-1.24h3.86m-18 0h18a2.25 2.25 0 0 1 2.25 2.25v4.5A2.25 2.25 0 0 1 18 21H6a2.25 2.25 0 0 1-2.25-2.25v-4.5a2.25 2.25 0 0 1 2.25-2.25ZM6 7.5h12a2.25 2.25 0 0 1 20.25 9.75v1.5H3.75v-1.5A2.25 2.25 0 0 1 6 7.5Z" />
+            </svg>
+            Projects
+          </a>
+        </li>
+        <li>
+          <a
+            class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:text-white hover:bg-slate-800/30 transition-all duration-200"
+            href="techstack.html"
+          >
+            <!-- Icon Code -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+            </svg>
+            Tech Stack
+          </a>
+        </li>
+      </ul>
+      <div class="mt-auto border-t border-slate-800">
+        <ul class="font-inter text-sm font-medium tracking-wide py-4">
+          <li>
+            <a
+              class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:text-white hover:bg-slate-800/30 transition-all duration-200"
+              href="/"
+            >
+              <!-- Icon Globe/Public -->
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9s2.015-9 4.5-9m0 0a9.003 9.003 0 0 1 8.716 6.747M12 3a9.003 9.003 0 0 0-8.716 6.747M21 12h-3M3 12h3m9 0H9" />
+              </svg>
+              View Site
+            </a>
+          </li>
+          <li>
+            <a
+              class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:text-red-400 hover:bg-slate-800/30 transition-all duration-200 cursor-pointer"
+              onclick="logout()"
+            >
+              <!-- Icon Logout -->
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
+              </svg>
+              Logout
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Top Header -->
+    <header class="fixed top-0 right-0 left-[280px] z-30 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm flex justify-between items-center h-16 px-8 font-inter text-base font-medium">
+      <div class="flex items-center gap-6">
+        <span class="font-bold text-indigo-600 dark:text-indigo-400">Portfolio Management</span>
+        <div class="relative flex items-center focus-within:ring-2 focus-within:ring-indigo-500 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 px-3 py-1.5 w-64">
+          <!-- Icon Search -->
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 mr-2 text-slate-400">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.602 10.602Z" />
+          </svg>
+          <input
+            class="bg-transparent border-none outline-none text-sm w-full text-slate-700 dark:text-slate-300 placeholder-slate-400 focus:ring-0 p-0"
+            placeholder="Search..."
+            type="text"
+          />
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <button class="text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg p-2 transition-colors flex items-center justify-center cursor-pointer">
+          <!-- Icon Bell -->
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-5 h-5 text-slate-500">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+          </svg>
+        </button>
+        <img
+          alt="User"
+          class="w-8 h-8 rounded-full object-cover ml-2 border border-slate-200"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4m06Nyez4nZ9V3lwcCXOVX2_CnP7hdoLa3IFAVZvtSY7iypb72vNwZqwQQsMO57JLDihjYCXNV0oIa-2tkW8Fi_7cpg90zDRH7lSD9Xrmg3K0dLubcx32l-v8X3VdA9m0oTX6rtNr2ZxviLTCe-oMYJDj7uCpcrsyJSpWTghZ_bXHJxkiEtHhtXKLUYTi_CmZbKpWamaaAdDQa5TgyEn0SiUm1-PXhkZxJLI6Btw2E9yp9-17i4-aWzBMT53icVUtDfescCYm_w"
+        />
+      </div>
+    </header>
+
+    <!-- Main Workspace Container -->
+    <main class="ml-[280px] pt-16 flex-1 p-container-padding">
+      <div class="mb-8 flex justify-between items-end">
+        <div>
+          <h1 class="font-h1 text-h1 text-on-background">Contact Information</h1>
+          <p class="font-body-md text-body-md text-on-surface-variant mt-2 max-w-2xl">
+            Manage communication channels and social links displayed on your public portfolio.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 xl:grid-cols-12 gap-gutter items-start">
+        <div class="xl:col-span-7 space-y-gutter">
+          <div class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm overflow-hidden">
+            <div class="p-6 border-b border-outline-variant bg-surface-container-low/30">
+              <h2 class="font-h3 text-h3 text-on-surface">Digital Presence</h2>
+            </div>
+            <form class="p-6 space-y-gutter" id="contactForm">
+              <div class="flex flex-col gap-2">
+                <label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide" for="email">
+                  Primary Email Address
+                </label>
+                <div class="relative flex items-center">
+                  <!-- Icon Mail -->
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-5 h-5 absolute left-3 text-outline">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                  </svg>
+                  <input
+                    class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-outline-variant bg-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-on-surface font-body-md transition-all shadow-sm"
+                    id="email"
+                    type="email"
+                  />
+                </div>
+              </div>
+              <hr class="border-outline-variant/50" />
+              <div class="space-y-4">
+                <h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">
+                  Social & Professional Links
+                </h3>
+                <div class="flex flex-col gap-2">
+                  <label class="sr-only" for="linkedin">LinkedIn URL</label>
+                  <div class="relative flex items-center">
+                    <div class="absolute left-3 w-6 h-6 flex items-center justify-center bg-[#0A66C2] rounded text-white text-xs font-bold font-inter">
+                      in
+                    </div>
+                    <input
+                      class="w-full pl-12 pr-4 py-2.5 rounded-lg border border-outline-variant bg-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-on-surface font-body-md transition-all shadow-sm"
+                      id="linkedin"
+                      placeholder="https://linkedin.com/in/username"
+                      type="url"
+                    />
+                  </div>
+                </div>
+                <div class="flex flex-col gap-2">
+                  <label class="sr-only" for="github">GitHub URL</label>
+                  <div class="relative flex items-center">
+                    <span class="absolute left-3 text-on-surface font-bold text-sm font-inter">GH</span>
+                    <input
+                      class="w-full pl-12 pr-4 py-2.5 rounded-lg border border-outline-variant bg-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-on-surface font-body-md transition-all shadow-sm"
+                      id="github"
+                      placeholder="https://github.com/username"
+                      type="url"
+                    />
+                  </div>
+                </div>
+                <div class="flex flex-col gap-2">
+                  <label class="sr-only" for="twitter">Twitter / X URL</label>
+                  <div class="relative flex items-center">
+                    <span class="absolute left-3 text-on-surface font-bold text-sm font-inter">X</span>
+                    <input
+                      class="w-full pl-12 pr-4 py-2.5 rounded-lg border border-outline-variant bg-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-on-surface font-body-md transition-all shadow-sm"
+                      id="twitter"
+                      placeholder="https://twitter.com/username"
+                      type="url"
+                    />
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="p-6 border-t border-outline-variant bg-surface-container-low/30 flex justify-end gap-3">
+              <button
+                class="px-5 py-2.5 rounded-lg border border-outline font-label-sm text-label-sm text-on-surface hover:bg-surface-variant transition-colors cursor-pointer"
+                type="button"
+                onclick="loadContact()"
+              >
+                Discard Changes
+              </button>
+              <button
+                class="px-5 py-2.5 rounded-lg bg-primary font-label-sm text-label-sm text-on-primary shadow-sm transition-colors flex items-center gap-2 cursor-pointer"
+                type="button"
+                onclick="saveContact()"
+              >
+                <!-- Icon Save -->
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" class="w-4 h-4">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+                Save Configuration
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Live Preview Sidebar -->
+        <div class="xl:col-span-5 sticky top-[100px]">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-h3 text-h3 text-on-surface">Live Preview</h3>
+            <span class="px-2.5 py-1 rounded-full bg-surface-container text-primary font-label-sm text-label-sm border border-primary-fixed-dim flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+              Real-time
+            </span>
+          </div>
+          <div class="rounded-xl border border-outline-variant bg-surface-container-lowest shadow-sm p-8 relative overflow-hidden flex flex-col items-center text-center">
+            <div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: radial-gradient(#000 1px, transparent 1px); background-size: 20px 20px;"></div>
+            <div class="relative z-10 w-full max-w-sm">
+              <div class="w-20 h-20 rounded-full bg-surface-container border-4 border-surface-container-lowest shadow mx-auto mb-6 overflow-hidden">
+                <img
+                  alt="Profile"
+                  class="w-full h-full object-cover"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVhSXtKkLEfpCWZQnof5rv-vrxe3g0hPyzXEqOwwpl6Ex4S-Fb8BfskTHAchmHtSqeXG3Us-x4Hf9VVP33HuQTV86rSyUDY0_qTfn9XyXcpaU6_UQqkqEIaWCcvUTPKSKqjRgCRwODeDxelUvcch7oTnLJkRV233kKAo2YdFoViaMK6cRxqXiqpdNXJtmYJr15v_Uybxbd_zFBjspcF31UiAbcAggK25J3dTGN8g6OMfcx4DDKBF5vXsIdKb8oZTKk2ahi7Z42Nw"
+                />
+              </div>
+              <h4 class="font-h2 text-h2 text-on-surface mb-2">Let's Connect</h4>
+              <p class="font-body-md text-body-md text-on-surface-variant mb-8">
+                I'm currently open to new opportunities and collaborations.
+              </p>
+              <div class="space-y-3">
+                <a
+                  class="flex items-center justify-center gap-3 w-full py-3 px-4 rounded-lg bg-surface-container-low hover:bg-surface-container border border-outline-variant transition-colors group"
+                  href="#"
+                  id="previewEmail"
+                >
+                  <!-- Icon Mail -->
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-5 h-5 text-primary group-hover:scale-105 transition-transform">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                  </svg>
+                  <span class="font-label-sm text-label-sm text-on-surface group-hover:text-primary transition-colors" id="previewEmailText">
+                    your@email.com
+                  </span>
+                </a>
+                
+                <div class="flex justify-center gap-3 pt-4">
+                  <a
+                    class="w-12 h-12 flex items-center justify-center rounded-full bg-surface-container-low border border-outline-variant hover:border-primary hover:text-primary text-on-surface transition-all shadow-sm font-bold font-inter"
+                    href="#"
+                    id="previewLinkedin"
+                    target="_blank"
+                  >
+                    in
+                  </a>
+                  <a
+                    class="w-12 h-12 flex items-center justify-center rounded-full bg-surface-container-low border border-outline-variant hover:border-primary hover:text-primary text-on-surface transition-all shadow-sm font-bold text-sm font-inter"
+                    href="#"
+                    id="previewGithub"
+                    target="_blank"
+                  >
+                    GH
+                  </a>
+                  <a
+                    class="w-12 h-12 flex items-center justify-center rounded-full bg-surface-container-low border border-outline-variant hover:border-primary hover:text-primary text-on-surface transition-all shadow-sm font-bold text-sm font-inter"
+                    href="#"
+                    id="previewTwitter"
+                    target="_blank"
+                  >
+                    X
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

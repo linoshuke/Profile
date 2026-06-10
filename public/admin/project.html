@@ -1,100 +1,285 @@
-<!DOCTYPE html>
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Projects - Portfolio Admin</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,200..200&display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script defer src="/__/firebase/12.14.0/firebase-app-compat.js"></script>
-<script defer src="/__/firebase/12.14.0/firebase-firestore-compat.js"></script>
-<script defer src="/__/firebase/init.js?useEmulator=true"></script>
-<script id="tailwind-config">
-tailwind.config={darkMode:"class",theme:{extend:{colors:{"surface-tint":"#4d44e3",secondary:"#565e74","surface-variant":"#d3e4fe","on-error":"#ffffff","tertiary-fixed-dim":"#6bd8cb",surface:"#f8f9ff","on-secondary-fixed-variant":"#3f465c","on-primary-fixed-variant":"#3323cc","surface-container-lowest":"#ffffff",tertiary:"#00524b","inverse-primary":"#c3c0ff","surface-bright":"#f8f9ff","tertiary-container":"#006c63","surface-container-low":"#eff4ff","outline-variant":"#c7c4d8","on-background":"#0b1c30","surface-dim":"#cbdbf5","secondary-fixed-dim":"#bec6e0","surface-container-highest":"#d3e4fe","surface-container-high":"#dce9ff","on-tertiary-fixed-variant":"#005049","primary-fixed-dim":"#c3c0ff","on-tertiary-fixed":"#00201d","inverse-surface":"#213145","on-secondary":"#ffffff","secondary-fixed":"#dae2fd","on-tertiary":"#ffffff",error:"#ba1a1a",primary:"#3525cd","surface-container":"#e5eeff","on-surface-variant":"#464555","on-surface":"#0b1c30","tertiary-fixed":"#89f5e7","secondary-container":"#dae2fd","on-error-container":"#93000a","primary-container":"#4f46e5","error-container":"#ffdad6","on-primary-fixed":"#0f0069","primary-fixed":"#e2dfff","on-tertiary-container":"#81eddf",outline:"#777587","on-secondary-fixed":"#131b2e","on-secondary-container":"#5c647a","on-primary":"#ffffff",background:"#f8f9ff","inverse-on-surface":"#eaf1ff","on-primary-container":"#dad7ff"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"sidebar-width":"280px","card-gap":"20px",gutter:"24px","container-padding":"32px",base:"4px"},fontFamily:{"body-lg":["Inter"],h1:["Inter"],"label-sm":["Inter"],h3:["Inter"],"body-md":["Inter"],h2:["Inter"]},fontSize:{"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}],h1:["30px",{lineHeight:"36px",letterSpacing:"-0.02em",fontWeight:"600"}],"label-sm":["12px",{lineHeight:"16px",letterSpacing:"0.02em",fontWeight:"500"}],h3:["20px",{lineHeight:"28px",fontWeight:"600"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],h2:["24px",{lineHeight:"32px",letterSpacing:"-0.01em",fontWeight:"600"}]}}}}</script>
-<style>.ambient-shadow{box-shadow:0 4px 20px -4px rgba(0,0,0,.05)}.toast{position:fixed;bottom:24px;right:24px;padding:12px 20px;border-radius:8px;color:#fff;font-size:14px;font-weight:500;z-index:9999;opacity:0;transform:translateY(20px);transition:all .3s;pointer-events:none}.toast.show{opacity:1;transform:translateY(0)}.toast.success{background:#059669}.toast.error{background:#dc2626}.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;display:none;align-items:center;justify-content:center}.modal-overlay.open{display:flex}.modal-content{background:#fff;border-radius:12px;max-width:640px;width:90%;max-height:90vh;overflow-y:auto;padding:32px}</style>
-</head>
-<body class="bg-background text-on-surface font-body-lg flex min-h-screen">
-<div id="toast" class="toast"></div>
-<div id="projectModal" class="modal-overlay"><div class="modal-content"><div class="flex items-center justify-between mb-6"><h2 class="font-h2 text-h2 text-on-surface" id="modalTitle">New Project</h2><button class="text-slate-400 hover:text-slate-700" onclick="closeModal()"><span class="material-symbols-outlined">close</span></button></div>
-<form id="projectForm" class="space-y-4"><input type="hidden" id="editId"/>
-<div><label class="font-label-sm text-label-sm text-on-surface-variant" for="pTitle">Project Title</label><input class="w-full border border-outline-variant rounded-lg px-4 py-2.5 bg-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none" id="pTitle" required/></div>
-<div><label class="font-label-sm text-label-sm text-on-surface-variant" for="pShortDesc">Short Description</label><textarea class="w-full border border-outline-variant rounded-lg px-4 py-2.5 bg-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none resize-none" id="pShortDesc" rows="2"></textarea></div>
-<div><label class="font-label-sm text-label-sm text-on-surface-variant" for="pCategory">Category</label><select class="w-full border border-outline-variant rounded-lg px-4 py-2.5 bg-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none" id="pCategory"><option value="Web Application">Web Application</option><option value="Mobile App">Mobile App</option><option value="API / Backend">API / Backend</option><option value="UI/UX Design">UI/UX Design</option></select></div>
-<div><label class="font-label-sm text-label-sm text-on-surface-variant" for="pTechStack">Tech Stack (comma separated)</label><input class="w-full border border-outline-variant rounded-lg px-4 py-2.5 bg-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none" id="pTechStack" placeholder="React, Node.js, PostgreSQL"/></div>
-<div class="grid grid-cols-2 gap-4"><div><label class="font-label-sm text-label-sm text-on-surface-variant" for="pProjectUrl">Project URL</label><input class="w-full border border-outline-variant rounded-lg px-4 py-2.5 bg-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none" id="pProjectUrl" placeholder="https://"/></div><div><label class="font-label-sm text-label-sm text-on-surface-variant" for="pRepoUrl">Repository URL</label><input class="w-full border border-outline-variant rounded-lg px-4 py-2.5 bg-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none" id="pRepoUrl" placeholder="https://github.com/"/></div></div>
-<div><label class="font-label-sm text-label-sm text-on-surface-variant" for="pCaseStudy">Full Case Study</label><textarea class="w-full border border-outline-variant rounded-lg px-4 py-2.5 bg-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none resize-y" id="pCaseStudy" rows="4"></textarea></div>
-</form>
-<div class="flex justify-end gap-3 mt-6 pt-4 border-t border-outline-variant"><button class="px-5 py-2 rounded-lg border border-outline text-secondary hover:bg-surface-variant transition-colors" onclick="closeModal()">Cancel</button><button class="px-5 py-2 rounded-lg bg-primary text-on-primary hover:bg-primary/90 transition-colors flex items-center gap-2" onclick="saveProject()"><span class="material-symbols-outlined text-[18px]">save</span> Save Project</button></div></div></div>
-<nav class="fixed left-0 top-0 h-full w-[280px] border-r border-slate-800 shadow-xl bg-slate-900 flex flex-col overflow-y-auto z-50">
-<div class="text-white text-xl font-bold tracking-tight px-6 py-8 flex flex-col">Portfolio Manager<span class="text-sm font-normal text-slate-400 mt-1">Sophisticated Operator</span></div>
-<div class="px-6 mb-6"><button class="w-full py-2 bg-indigo-500/10 text-indigo-400 rounded-lg font-['Inter'] text-sm font-medium border border-indigo-500/20 hover:bg-indigo-500/20 transition-colors" onclick="openModal()">New Project</button></div>
-<ul class="flex-1 font-['Inter'] text-sm font-medium tracking-wide flex flex-col">
-<li><a class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:text-white hover:bg-slate-800/30 transition-colors hover:bg-slate-800/50 transition-all duration-200" href="dashboard.html"><span class="material-symbols-outlined">dashboard</span> Dashboard</a></li>
-<li><a class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:text-white hover:bg-slate-800/30 transition-colors hover:bg-slate-800/50 transition-all duration-200" href="contact.html"><span class="material-symbols-outlined">mail</span> Contact</a></li>
-<li><a class="flex items-center gap-3 px-6 py-3 border-l-4 border-indigo-500 bg-slate-800/50 text-white transition-all duration-200" href="project.html"><span class="material-symbols-outlined" style="font-variation-settings:'FILL'1">folder_special</span> Projects</a></li>
-<li><a class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:text-white hover:bg-slate-800/30 transition-colors hover:bg-slate-800/50 transition-all duration-200" href="techstack.html"><span class="material-symbols-outlined">code</span> Tech Stack</a></li>
-</ul>
-<div class="mt-auto border-t border-slate-800"><ul class="font-['Inter'] text-sm font-medium tracking-wide py-4">
-<li><a class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:text-white hover:bg-slate-800/30 transition-all duration-200" href="/"><span class="material-symbols-outlined">public</span> View Site</a></li>
-<li><a class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:text-red-400 hover:bg-slate-800/30 transition-all duration-200 cursor-pointer" onclick="logout()"><span class="material-symbols-outlined">logout</span> Logout</a></li>
-</ul></div>
-</nav>
-<div class="flex-1 flex flex-col ml-[280px] w-[calc(100%-280px)]">
-<header class="sticky top-0 z-40 w-full border-b border-slate-200 shadow-sm bg-white/80 backdrop-blur-md flex items-center justify-between px-8 h-16">
-<div class="flex items-center gap-8 h-full"><div class="text-slate-900 text-lg font-bold">Projects</div></div>
-<div class="flex items-center gap-4"><button class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-colors"><span class="material-symbols-outlined">search</span></button><button class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-colors"><span class="material-symbols-outlined">notifications</span></button><button class="bg-indigo-600 text-white px-4 py-2 rounded font-['Inter'] text-sm font-semibold hover:bg-indigo-700 transition-colors flex items-center gap-2" onclick="openModal()"><span class="material-symbols-outlined text-[18px]">add</span> New Project</button></div>
-</header>
-<main class="p-container-padding flex-1">
-<div class="max-w-6xl mx-auto">
-<div class="flex items-center justify-between mb-6"><div><h1 class="font-h1 text-h1 text-on-surface">All Projects</h1><p class="font-body-md text-body-md text-on-surface-variant mt-1" id="projectCount">Loading...</p></div></div>
-<div id="projectList" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-card-gap"><div class="col-span-full text-center py-12 text-on-surface-variant"><span class="material-symbols-outlined text-4xl block mb-2">hourglass_empty</span>Loading projects...</div></div>
-</div>
-</main>
-</div>
-<script>
-function showToast(m,t='success'){const e=document.getElementById('toast');e.textContent=m;e.className='toast '+t+' show';setTimeout(()=>e.classList.remove('show'),3000)}
-function logout(){sessionStorage.removeItem('admin_auth');window.location.href='index.html'}
-let db;
-document.addEventListener('DOMContentLoaded',function(){
-  if(sessionStorage.getItem('admin_auth')!=='1'){window.location.href='index.html';return}
-  try{db=firebase.firestore();loadProjects()}catch(e){showToast('Firebase error','error')}
-});
-function openModal(id){
-  document.getElementById('projectModal').classList.add('open');
-  if(id){document.getElementById('modalTitle').textContent='Edit Project';
-    db.collection('projects').doc(id).get().then(doc=>{if(doc.exists){const d=doc.data();document.getElementById('editId').value=id;document.getElementById('pTitle').value=d.title||'';document.getElementById('pShortDesc').value=d.shortDesc||'';document.getElementById('pCategory').value=d.category||'Web Application';document.getElementById('pTechStack').value=(d.techStack||[]).join(', ');document.getElementById('pProjectUrl').value=d.projectUrl||'';document.getElementById('pRepoUrl').value=d.repoUrl||'';document.getElementById('pCaseStudy').value=d.caseStudy||''}})
-  }else{document.getElementById('modalTitle').textContent='New Project';document.getElementById('projectForm').reset();document.getElementById('editId').value=''}}
-function closeModal(){document.getElementById('projectModal').classList.remove('open')}
-function saveProject(){
-  if(!db)return;
-  const eid=document.getElementById('editId').value,ts=document.getElementById('pTechStack').value;
-  const data={title:document.getElementById('pTitle').value,shortDesc:document.getElementById('pShortDesc').value,category:document.getElementById('pCategory').value,techStack:ts?ts.split(',').map(s=>s.trim()).filter(Boolean):[],projectUrl:document.getElementById('pProjectUrl').value,repoUrl:document.getElementById('pRepoUrl').value,caseStudy:document.getElementById('pCaseStudy').value,updatedAt:firebase.firestore.FieldValue.serverTimestamp()};
-  if(!data.title){showToast('Title required','error');return}
-  const p=eid?db.collection('projects').doc(eid).update(data):db.collection('projects').add({...data,createdAt:firebase.firestore.FieldValue.serverTimestamp()});
-  p.then(()=>{showToast(eid?'Updated!':'Created!');closeModal();loadProjects()}).catch(e=>{console.error(e);showToast('Error saving','error')});
-}
-function deleteProject(id){if(!confirm('Delete?'))return;db.collection('projects').doc(id).delete().then(()=>{showToast('Deleted');loadProjects()}).catch(e=>{console.error(e);showToast('Error deleting','error')})}
-function loadProjects(){
-  if(!db)return;
-  const list=document.getElementById('projectList');list.innerHTML='<div class="col-span-full text-center py-12 text-on-surface-variant"><span class="material-symbols-outlined text-4xl block mb-2">hourglass_empty</span>Loading...</div>';
-  db.collection('projects').orderBy('createdAt','desc').get().then(snap=>{
-    document.getElementById('projectCount').textContent=snap.size+' project(s)';
-    if(snap.empty){list.innerHTML='<div class="col-span-full text-center py-16 text-on-surface-variant"><span class="material-symbols-outlined text-5xl block mb-4">folder_off</span><p class="font-h3 text-h3">No projects yet</p><p class="font-body-md text-body-md mt-1">Click "New Project" to get started.</p></div>';return}
-    let html='';snap.forEach(doc=>{const d=doc.data(),id=doc.id,tt=(d.techStack||[]).map(t=>'<span class="px-2 py-0.5 bg-primary/10 text-primary rounded-full text-xs font-medium">'+esc(t)+'</span>').join('');
-      html+='<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 ambient-shadow hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,.1)] transition-shadow duration-300 flex flex-col">'
-      +'<div class="flex items-start justify-between mb-3"><span class="px-2.5 py-1 bg-surface-container rounded-full text-xs font-medium text-on-surface-variant">'+(d.category||'General')+'</span>'
-      +'<div class="flex gap-1"><button class="p-1.5 text-slate-400 hover:text-primary rounded transition-colors" onclick="openModal(\''+id+'\')"><span class="material-symbols-outlined text-[18px]">edit</span></button>'
-      +'<button class="p-1.5 text-slate-400 hover:text-error rounded transition-colors" onclick="deleteProject(\''+id+'\')"><span class="material-symbols-outlined text-[18px]">delete</span></button></div></div>'
-      +'<h3 class="font-h3 text-h3 text-on-surface mb-2">'+esc(d.title||'')+'</h3>'
-      +'<p class="font-body-md text-body-md text-on-surface-variant mb-4 flex-1">'+esc(d.shortDesc||'')+'</p>'
-      +'<div class="flex flex-wrap gap-1.5 mb-4">'+tt+'</div>'
-      +(d.projectUrl||d.repoUrl?'<div class="flex gap-3 pt-3 border-t border-outline-variant">':'')
-      +(d.projectUrl?'<a href="'+d.projectUrl+'" target="_blank" class="text-primary text-sm hover:underline flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">open_in_new</span> Live</a>':'')
-      +(d.repoUrl?'<a href="'+d.repoUrl+'" target="_blank" class="text-primary text-sm hover:underline flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">code</span> Repo</a>':'')
-      +'</div></div>'});
-    list.innerHTML=html;
-  }).catch(e=>{console.error(e);list.innerHTML='<div class="col-span-full text-center py-12 text-error">Error loading projects</div>'});
-}
-function esc(t){const d=document.createElement('div');d.textContent=t;return d.innerHTML}
-</script>
-</body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Projects - Portfolio Admin</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <!-- Custom Tailwind Configuration -->
+    <script src="js/tailwind-config.js"></script>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Local Custom Stylesheet -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Firebase SDK Compat Services -->
+    <script defer src="/__/firebase/12.14.0/firebase-app-compat.js"></script>
+    <script defer src="/__/firebase/12.14.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+    <!-- Application Script -->
+    <script defer src="js/project.js"></script>
+  </head>
+  <body class="bg-background text-on-surface font-body-lg text-body-lg flex min-h-screen">
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Modal Form Project -->
+    <div id="projectModal" class="modal-overlay">
+      <div class="modal-content">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="font-h2 text-h2 text-on-surface" id="modalTitle">New Project</h2>
+          <button class="text-slate-400 hover:text-slate-700 flex items-center justify-center cursor-pointer" onclick="closeModal()">
+            <!-- Icon X-Mark -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <form id="projectForm" class="space-y-4">
+          <input type="hidden" id="editId" />
+          <div>
+            <label class="font-label-sm text-label-sm text-on-surface-variant" for="pTitle">Project Title</label>
+            <input
+              class="w-full border border-outline-variant rounded-lg px-4 py-2.5 bg-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none"
+              id="pTitle"
+              required
+            />
+          </div>
+          <div>
+            <label class="font-label-sm text-label-sm text-on-surface-variant" for="pShortDesc">Short Description</label>
+            <textarea
+              class="w-full border border-outline-variant rounded-lg px-4 py-2.5 bg-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none resize-none"
+              id="pShortDesc"
+              rows="2"
+            ></textarea>
+          </div>
+          <div>
+            <label class="font-label-sm text-label-sm text-on-surface-variant" for="pCategory">Category</label>
+            <select
+              class="w-full border border-outline-variant rounded-lg px-4 py-2.5 bg-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none"
+              id="pCategory"
+            >
+              <option value="Web Application">Web Application</option>
+              <option value="Mobile App">Mobile App</option>
+              <option value="API / Backend">API / Backend</option>
+              <option value="UI/UX Design">UI/UX Design</option>
+            </select>
+          </div>
+          <div>
+            <label class="font-label-sm text-label-sm text-on-surface-variant" for="pTechStack">Tech Stack (comma separated)</label>
+            <input
+              class="w-full border border-outline-variant rounded-lg px-4 py-2.5 bg-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none"
+              id="pTechStack"
+              placeholder="React, Node.js, PostgreSQL"
+            />
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="font-label-sm text-label-sm text-on-surface-variant" for="pProjectUrl">Project URL</label>
+              <input
+                class="w-full border border-outline-variant rounded-lg px-4 py-2.5 bg-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none"
+                id="pProjectUrl"
+                placeholder="https://"
+              />
+            </div>
+            <div>
+              <label class="font-label-sm text-label-sm text-on-surface-variant" for="pRepoUrl">Repository URL</label>
+              <input
+                class="w-full border border-outline-variant rounded-lg px-4 py-2.5 bg-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none"
+                id="pRepoUrl"
+                placeholder="https://github.com/"
+              />
+            </div>
+          </div>
+          <div>
+            <label class="font-label-sm text-label-sm text-on-surface-variant" for="pCaseStudy">Full Case Study</label>
+            <textarea
+              class="w-full border border-outline-variant rounded-lg px-4 py-2.5 bg-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none resize-y"
+              id="pCaseStudy"
+              rows="4"
+            ></textarea>
+          </div>
+        </form>
+        <div class="flex justify-end gap-3 mt-6 pt-4 border-t border-outline-variant">
+          <button
+            class="px-5 py-2 rounded-lg border border-outline text-secondary hover:bg-surface-variant transition-colors cursor-pointer"
+            onclick="closeModal()"
+          >
+            Cancel
+          </button>
+          <button
+            class="px-5 py-2 rounded-lg bg-primary text-on-primary hover:bg-primary/90 transition-colors flex items-center gap-2 cursor-pointer"
+            onclick="saveProject()"
+          >
+            <!-- Icon Check Circle / Save -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            Save Project
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Sidebar -->
+    <nav class="fixed left-0 top-0 h-full w-[280px] border-r border-slate-800 shadow-xl bg-slate-900 flex flex-col overflow-y-auto z-50">
+      <div class="text-white text-xl font-bold tracking-tight px-6 py-8 flex flex-col">
+        Portfolio Manager
+        <span class="text-sm font-normal text-slate-400 mt-1">Sophisticated Operator</span>
+      </div>
+      <div class="px-6 mb-6">
+        <button
+          class="w-full py-2 bg-indigo-500/10 text-indigo-400 rounded-lg font-inter text-sm font-medium border border-indigo-500/20 hover:bg-indigo-500/20 transition-colors cursor-pointer"
+          onclick="openModal()"
+        >
+          New Project
+        </button>
+      </div>
+      <ul class="flex-1 font-inter text-sm font-medium tracking-wide flex flex-col gap-1">
+        <li>
+          <a
+            class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:text-white hover:bg-slate-800/30 transition-all duration-200"
+            href="dashboard.html"
+          >
+            <!-- Icon Dashboard -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z" />
+            </svg>
+            Dashboard
+          </a>
+        </li>
+        <li>
+          <a
+            class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:text-white hover:bg-slate-800/30 transition-all duration-200"
+            href="contact.html"
+          >
+            <!-- Icon Mail -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+            </svg>
+            Contact
+          </a>
+        </li>
+        <li>
+          <a
+            class="flex items-center gap-3 px-6 py-3 border-l-4 border-indigo-500 bg-slate-800/50 text-white transition-all duration-200"
+            href="project.html"
+          >
+            <!-- Icon Projects -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 13.5h3.86a2.25 2.25 0 0 1 2.008 1.24l.885 1.77a2.25 2.25 0 0 0 2.007 1.24h1.98a2.25 2.25 0 0 0 2.007-1.24l.885-1.77a2.25 2.25 0 0 1 2.007-1.24h3.86m-18 0h18a2.25 2.25 0 0 1 2.25 2.25v4.5A2.25 2.25 0 0 1 18 21H6a2.25 2.25 0 0 1-2.25-2.25v-4.5a2.25 2.25 0 0 1 2.25-2.25ZM6 7.5h12a2.25 2.25 0 0 1 20.25 9.75v1.5H3.75v-1.5A2.25 2.25 0 0 1 6 7.5Z" />
+            </svg>
+            Projects
+          </a>
+        </li>
+        <li>
+          <a
+            class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:text-white hover:bg-slate-800/30 transition-all duration-200"
+            href="techstack.html"
+          >
+            <!-- Icon Code -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+            </svg>
+            Tech Stack
+          </a>
+        </li>
+      </ul>
+      <div class="mt-auto border-t border-slate-800">
+        <ul class="font-inter text-sm font-medium tracking-wide py-4">
+          <li>
+            <a
+              class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:text-white hover:bg-slate-800/30 transition-all duration-200"
+              href="/"
+            >
+              <!-- Icon Globe/Public -->
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9s2.015-9 4.5-9m0 0a9.003 9.003 0 0 1 8.716 6.747M12 3a9.003 9.003 0 0 0-8.716 6.747M21 12h-3M3 12h3m9 0H9" />
+              </svg>
+              View Site
+            </a>
+          </li>
+          <li>
+            <a
+              class="flex items-center gap-3 px-6 py-3 text-slate-400 hover:text-red-400 hover:bg-slate-800/30 transition-all duration-200 cursor-pointer"
+              onclick="logout()"
+            >
+              <!-- Icon Logout -->
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
+              </svg>
+              Logout
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main Workspace -->
+    <div class="flex-1 flex flex-col ml-[280px] w-[calc(100%-280px)]">
+      <!-- Header -->
+      <header class="sticky top-0 z-40 w-full border-b border-slate-200 shadow-sm bg-white/80 backdrop-blur-md flex items-center justify-between px-8 h-16">
+        <div class="flex items-center gap-8 h-full">
+          <div class="text-slate-900 text-lg font-bold font-inter">Projects</div>
+        </div>
+        <div class="flex items-center gap-4">
+          <button class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-colors flex items-center justify-center cursor-pointer">
+            <!-- Icon Search -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.602 10.602Z" />
+            </svg>
+          </button>
+          <button class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-colors flex items-center justify-center cursor-pointer">
+            <!-- Icon Bell -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+            </svg>
+          </button>
+          <button
+            class="bg-indigo-600 text-white px-4 py-2 rounded font-inter text-sm font-semibold hover:bg-indigo-700 transition-colors flex items-center gap-2 cursor-pointer"
+            onclick="openModal()"
+          >
+            <!-- Icon Add (Plus) -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+            New Project
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Container -->
+      <main class="p-container-padding flex-1">
+        <div class="max-w-6xl mx-auto">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <h1 class="font-h1 text-h1 text-on-surface">All Projects</h1>
+              <p class="font-body-md text-body-md text-on-surface-variant mt-1" id="projectCount">
+                Loading...
+              </p>
+            </div>
+          </div>
+          <div id="projectList" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-card-gap">
+            <!-- Loading default visual -->
+            <div class="col-span-full text-center py-12 text-on-surface-variant flex flex-col items-center justify-center gap-3">
+              <svg class="animate-spin h-8 w-8 text-indigo-500" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              <span>Loading projects...</span>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
