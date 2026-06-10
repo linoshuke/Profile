@@ -139,7 +139,11 @@
       <div class="px-6 mb-6">
         <button
           class="w-full py-2 bg-indigo-500/10 text-indigo-400 rounded-lg font-inter text-sm font-medium border border-indigo-500/20 hover:bg-indigo-500/20 transition-colors cursor-pointer"
-          onclick="openModal()"
+          onclick="
+            typeof openModal === 'function'
+              ? openModal()
+              : (window.location.href = 'project.html?action=new')
+          "
         >
           New Project
         </button>

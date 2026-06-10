@@ -39,12 +39,16 @@
         <span class="text-sm font-normal text-slate-400 mt-1">Sophisticated Operator</span>
       </div>
       <div class="px-6 mb-6">
-        <a
-          href="project.html"
-          class="block w-full py-2 bg-indigo-500/10 text-indigo-400 rounded-lg font-inter text-sm font-medium border border-indigo-500/20 hover:bg-indigo-500/20 transition-colors text-center"
+        <button
+          class="w-full py-2 bg-indigo-500/10 text-indigo-400 rounded-lg font-inter text-sm font-medium border border-indigo-500/20 hover:bg-indigo-500/20 transition-colors cursor-pointer"
+          onclick="
+            typeof openModal === 'function'
+              ? openModal()
+              : (window.location.href = 'project.html?action=new')
+          "
         >
           New Project
-        </a>
+        </button>
       </div>
       <ul class="flex-1 font-inter text-sm font-medium tracking-wide flex flex-col gap-1">
         <li>

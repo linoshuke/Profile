@@ -20,41 +20,69 @@
 
     <!-- Firebase SDK Compat Services -->
     <script defer src="/__/firebase/12.14.0/firebase-app-compat.js"></script>
-    <script defer src="/__/firebase/12.14.0/firebase-firestore-compat.js"></script>
+    <script
+      defer
+      src="/__/firebase/12.14.0/firebase-firestore-compat.js"
+    ></script>
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 
     <!-- Application Script (Di-load setelah Firebase SDK siap) -->
     <script defer src="js/dashboard.js"></script>
   </head>
-  <body class="bg-background min-h-screen flex font-body-lg text-body-lg text-on-background">
+  <body
+    class="bg-background min-h-screen flex font-body-lg text-body-lg text-on-background"
+  >
     <!-- Toast Notification Container -->
     <div id="toast" class="toast"></div>
 
     <!-- Navigation Sidebar -->
-    <nav class="fixed left-0 top-0 h-full w-[280px] border-r border-slate-800 shadow-xl bg-slate-900 flex flex-col overflow-y-auto z-50">
-      <div class="text-white text-xl font-bold tracking-tight px-6 py-8 flex flex-col">
+    <nav
+      class="fixed left-0 top-0 h-full w-[280px] border-r border-slate-800 shadow-xl bg-slate-900 flex flex-col overflow-y-auto z-50"
+    >
+      <div
+        class="text-white text-xl font-bold tracking-tight px-6 py-8 flex flex-col"
+      >
         Portfolio Manager
-        <span class="text-sm font-normal text-slate-400 mt-1">Sophisticated Operator</span>
-      </div>
-      
-      <div class="px-6 mb-6">
-        <a
-          href="project.html"
-          class="block w-full py-2 bg-indigo-500/10 text-indigo-400 rounded-lg font-inter text-sm font-medium border border-indigo-500/20 hover:bg-indigo-500/20 transition-colors text-center"
+        <span class="text-sm font-normal text-slate-400 mt-1"
+          >Sophisticated Operator</span
         >
-          New Project
-        </a>
       </div>
 
-      <ul class="flex-1 font-inter text-sm font-medium tracking-wide flex flex-col gap-1">
+      <div class="px-6 mb-6">
+        <button
+          class="w-full py-2 bg-indigo-500/10 text-indigo-400 rounded-lg font-inter text-sm font-medium border border-indigo-500/20 hover:bg-indigo-500/20 transition-colors cursor-pointer"
+          onclick="
+            typeof openModal === 'function'
+              ? openModal()
+              : (window.location.href = 'project.html?action=new')
+          "
+        >
+          New Project
+        </button>
+      </div>
+
+      <ul
+        class="flex-1 font-inter text-sm font-medium tracking-wide flex flex-col gap-1"
+      >
         <li>
           <a
             class="flex items-center gap-3 px-6 py-3 border-l-4 border-indigo-500 bg-slate-800/50 text-white transition-all duration-200"
             href="dashboard.html"
           >
             <!-- Icon Dashboard (Squares-2x2) -->
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-indigo-400">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-5 h-5 text-indigo-400"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z"
+              />
             </svg>
             Dashboard
           </a>
@@ -65,8 +93,19 @@
             href="contact.html"
           >
             <!-- Icon Mail -->
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+              />
             </svg>
             Contact
           </a>
@@ -77,8 +116,19 @@
             href="project.html"
           >
             <!-- Icon Projects (Folder) -->
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 13.5h3.86a2.25 2.25 0 0 1 2.008 1.24l.885 1.77a2.25 2.25 0 0 0 2.007 1.24h1.98a2.25 2.25 0 0 0 2.007-1.24l.885-1.77a2.25 2.25 0 0 1 2.007-1.24h3.86m-18 0h18a2.25 2.25 0 0 1 2.25 2.25v4.5A2.25 2.25 0 0 1 18 21H6a2.25 2.25 0 0 1-2.25-2.25v-4.5a2.25 2.25 0 0 1 2.25-2.25ZM6 7.5h12A2.25 2.25 0 0 1 20.25 9.75v1.5H3.75v-1.5A2.25 2.25 0 0 1 6 7.5Z" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M2.25 13.5h3.86a2.25 2.25 0 0 1 2.008 1.24l.885 1.77a2.25 2.25 0 0 0 2.007 1.24h1.98a2.25 2.25 0 0 0 2.007-1.24l.885-1.77a2.25 2.25 0 0 1 2.007-1.24h3.86m-18 0h18a2.25 2.25 0 0 1 2.25 2.25v4.5A2.25 2.25 0 0 1 18 21H6a2.25 2.25 0 0 1-2.25-2.25v-4.5a2.25 2.25 0 0 1 2.25-2.25ZM6 7.5h12A2.25 2.25 0 0 1 20.25 9.75v1.5H3.75v-1.5A2.25 2.25 0 0 1 6 7.5Z"
+              />
             </svg>
             Projects
           </a>
@@ -89,8 +139,19 @@
             href="techstack.html"
           >
             <!-- Icon Code -->
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"
+              />
             </svg>
             Tech Stack
           </a>
@@ -105,8 +166,19 @@
               href="/"
             >
               <!-- Icon Globe/Public -->
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9s2.015-9 4.5-9m0 0a9.003 9.003 0 0 1 8.716 6.747M12 3a9.003 9.003 0 0 0-8.716 6.747M21 12h-3M3 12h3m9 0H9" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-5 h-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9s2.015-9 4.5-9m0 0a9.003 9.003 0 0 1 8.716 6.747M12 3a9.003 9.003 0 0 0-8.716 6.747M21 12h-3M3 12h3m9 0H9"
+                />
               </svg>
               View Site
             </a>
@@ -117,8 +189,19 @@
               onclick="logout()"
             >
               <!-- Icon Logout -->
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-5 h-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"
+                />
               </svg>
               Logout
             </a>
@@ -129,14 +212,28 @@
 
     <!-- Main Content Area Wrapper -->
     <div class="flex-1 ml-[280px] flex flex-col min-h-screen">
-      
       <!-- Top Header -->
-      <header class="fixed top-0 right-0 left-[280px] z-30 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md font-inter text-base font-medium border-b border-slate-200 dark:border-slate-800 shadow-sm flex justify-between items-center h-16 px-8 w-full">
+      <header
+        class="fixed top-0 right-0 left-[280px] z-30 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md font-inter text-base font-medium border-b border-slate-200 dark:border-slate-800 shadow-sm flex justify-between items-center h-16 px-8 w-full"
+      >
         <div class="flex-1 max-w-md">
-          <div class="relative flex items-center text-slate-500 dark:text-slate-400 focus-within:ring-2 focus-within:ring-indigo-500 rounded-lg bg-slate-50 dark:bg-slate-800/50 px-3 py-2">
+          <div
+            class="relative flex items-center text-slate-500 dark:text-slate-400 focus-within:ring-2 focus-within:ring-indigo-500 rounded-lg bg-slate-50 dark:bg-slate-800/50 px-3 py-2"
+          >
             <!-- Icon Search -->
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 mr-2 text-slate-400">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.602 10.602Z" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              class="w-5 h-5 mr-2 text-slate-400"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.602 10.602Z"
+              />
             </svg>
             <input
               class="bg-transparent border-none outline-none w-full text-sm placeholder-slate-400 focus:ring-0 p-0 text-slate-900 dark:text-white"
@@ -146,13 +243,28 @@
           </div>
         </div>
         <div class="flex items-center gap-4">
-          <button class="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors flex items-center justify-center">
+          <button
+            class="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors flex items-center justify-center"
+          >
             <!-- Icon Bell -->
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
+              />
             </svg>
           </button>
-          <div class="h-8 w-8 rounded-full bg-slate-200 overflow-hidden ml-2 border border-slate-300 dark:border-slate-700">
+          <div
+            class="h-8 w-8 rounded-full bg-slate-200 overflow-hidden ml-2 border border-slate-300 dark:border-slate-700"
+          >
             <img
               alt="User"
               class="h-full w-full object-cover"
@@ -165,19 +277,27 @@
       <!-- Main Section -->
       <main class="flex-1 pt-16 p-container-padding bg-background">
         <div class="mb-8">
-          <h1 class="font-h1 text-h1 text-on-surface mb-2">General Information</h1>
+          <h1 class="font-h1 text-h1 text-on-surface mb-2">
+            General Information
+          </h1>
           <p class="font-body-md text-body-md text-on-surface-variant">
-            Manage your core identity and professional objective visible on your public portfolio.
+            Manage your core identity and professional objective visible on your
+            public portfolio.
           </p>
         </div>
 
         <div class="grid grid-cols-12 gap-gutter max-w-5xl">
           <!-- Profile Form Section -->
-          <div class="col-span-12 lg:col-span-8 bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm overflow-hidden">
+          <div
+            class="col-span-12 lg:col-span-8 bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm overflow-hidden"
+          >
             <div class="p-8">
               <form class="space-y-gutter" id="profileForm">
                 <div>
-                  <label class="block font-label-sm text-label-sm text-on-surface-variant mb-2" for="fullName">
+                  <label
+                    class="block font-label-sm text-label-sm text-on-surface-variant mb-2"
+                    for="fullName"
+                  >
                     Full Name
                   </label>
                   <input
@@ -187,7 +307,10 @@
                   />
                 </div>
                 <div>
-                  <label class="block font-label-sm text-label-sm text-on-surface-variant mb-2" for="primaryRole">
+                  <label
+                    class="block font-label-sm text-label-sm text-on-surface-variant mb-2"
+                    for="primaryRole"
+                  >
                     Primary Role
                   </label>
                   <input
@@ -197,7 +320,10 @@
                   />
                 </div>
                 <div>
-                  <label class="block font-label-sm text-label-sm text-on-surface-variant mb-2" for="aboutMe">
+                  <label
+                    class="block font-label-sm text-label-sm text-on-surface-variant mb-2"
+                    for="aboutMe"
+                  >
                     About Me / Objective
                   </label>
                   <textarea
@@ -205,18 +331,33 @@
                     id="aboutMe"
                     rows="5"
                   ></textarea>
-                  <p class="mt-2 font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1.5">
+                  <p
+                    class="mt-2 font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1.5"
+                  >
                     <!-- Icon Info -->
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 text-slate-400">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 1 1 1.063.852l-.708 2.836a.75.75 0 0 1 1.063.852l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      class="w-4 h-4 text-slate-400"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M11.25 11.25l.041-.02a.75.75 0 1 1 1.063.852l-.708 2.836a.75.75 0 0 1 1.063.852l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+                      />
                     </svg>
                     Keep it concise and impactful. Aim for 2-3 sentences.
                   </p>
                 </div>
               </form>
             </div>
-            
-            <div class="bg-surface-container-low px-8 py-5 border-t border-outline-variant flex justify-end gap-4">
+
+            <div
+              class="bg-surface-container-low px-8 py-5 border-t border-outline-variant flex justify-end gap-4"
+            >
               <button
                 class="px-6 py-2.5 font-label-sm text-label-sm text-secondary bg-transparent border border-outline-variant rounded-DEFAULT hover:bg-surface-variant transition-colors"
                 type="button"
@@ -230,8 +371,19 @@
                 onclick="saveProfile()"
               >
                 <!-- Icon Save (Check inside circle) -->
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  class="w-4 h-4"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                  />
                 </svg>
                 Save Changes
               </button>
@@ -240,8 +392,12 @@
 
           <!-- Preview Card Section -->
           <div class="col-span-12 lg:col-span-4 flex flex-col gap-gutter">
-            <div class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm p-6 flex flex-col items-center text-center">
-              <div class="h-24 w-24 rounded-full border-4 border-surface-container overflow-hidden mb-4">
+            <div
+              class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm p-6 flex flex-col items-center text-center"
+            >
+              <div
+                class="h-24 w-24 rounded-full border-4 border-surface-container overflow-hidden mb-4"
+              >
                 <img
                   alt="Avatar"
                   class="h-full w-full object-cover"
@@ -251,19 +407,39 @@
               <h3 class="font-h3 text-h3 text-on-surface mb-1" id="previewName">
                 Your Name
               </h3>
-              <p class="font-body-md text-body-md text-primary font-medium mb-6" id="previewRole">
+              <p
+                class="font-body-md text-body-md text-primary font-medium mb-6"
+                id="previewRole"
+              >
                 Your Role
               </p>
-              <div class="w-full bg-surface-container-low rounded-lg p-4 border border-outline-variant text-left">
-                <div class="font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">
+              <div
+                class="w-full bg-surface-container-low rounded-lg p-4 border border-outline-variant text-left"
+              >
+                <div
+                  class="font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider"
+                >
                   Profile Status
                 </div>
                 <div class="flex items-center gap-2 text-tertiary-container">
                   <!-- Icon Success Check Circle -->
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    class="w-5 h-5"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                    />
                   </svg>
-                  <span class="font-label-sm text-label-sm font-medium">Auto-saved to Firebase</span>
+                  <span class="font-label-sm text-label-sm font-medium"
+                    >Auto-saved to Firebase</span
+                  >
                 </div>
               </div>
             </div>

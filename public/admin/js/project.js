@@ -203,6 +203,15 @@ document.addEventListener("DOMContentLoaded", () => {
   try {
     db = firebase.firestore();
     loadProjects();
+
+    // Periksa apakah ada parameter '?action=new' di URL
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get("action") === "new") {
+      openModal();
+      
+      // Opsional: Bersihkan parameter dari address bar agar tidak terbuka kembali saat halaman di-refresh
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
   } catch (e) {
     showToast("Firebase error", "error");
   }
