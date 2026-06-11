@@ -12,7 +12,7 @@ function showToast(message, type = "success") {
 
 function logout() {
   sessionStorage.removeItem("admin_auth");
-  window.location.href = "index.html";
+  window.location.href = "/admin";
 }
 
 function openSkillModal(id) {
@@ -270,7 +270,7 @@ function esc(t) {
 // Bootstrapping
 document.addEventListener("DOMContentLoaded", () => {
   if (sessionStorage.getItem("admin_auth") !== "1") {
-    window.location.href = "index.html";
+    window.location.href = "/admin";
     return;
   }
   try {

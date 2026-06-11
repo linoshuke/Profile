@@ -9,7 +9,7 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     
     <!-- Custom Tailwind Configuration (Eksternal) -->
-    <script src="js/tailwind-config.js"></script>
+    <script src="/admin/js/tailwind-config.js"></script>
     
     <!-- Google Fonts -->
     <link
@@ -18,7 +18,7 @@
     />
     
     <!-- Local Custom Stylesheet (Eksternal) -->
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="/admin/css/style.css" />
     
     <!-- Firebase SDK Compat Services -->
     <script defer src="/__/firebase/12.14.0/firebase-app-compat.js"></script>
@@ -26,7 +26,7 @@
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
     
     <!-- Application Script (Eksternal) -->
-    <script defer src="js/login.js"></script>
+    <script defer src="/admin/js/login.js"></script>
   </head>
   <body class="bg-background text-on-background min-h-screen flex items-center justify-center font-body-lg text-body-lg antialiased">
     <!-- Toast Notification Container -->
@@ -48,13 +48,30 @@
         <form id="loginForm" class="space-y-5">
           <div>
             <label class="block text-sm font-semibold text-slate-700 mb-1.5 font-inter" for="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              required
-              class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-shadow"
-              placeholder="Enter admin password"
-            />
+            <div class="relative">
+              <input
+                type="password"
+                id="password"
+                required
+                class="w-full pl-4 pr-10 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-shadow"
+                placeholder="Enter admin password"
+              />
+              <button
+                type="button"
+                id="togglePassword"
+                class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none cursor-pointer"
+              >
+                <!-- Eye icon (default) -->
+                <svg id="eyeOpen" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-5 h-5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                </svg>
+                <!-- Eye-slash icon (hidden initially) -->
+                <svg id="eyeClosed" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-5 h-5 hidden">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.815 7.815 3 3m-3-3a8.19 8.19 0 0 1-5.074 1.777c-2.9 0-5.46-1.517-6.918-3.83a9.043 9.043 0 0 1-1.34-1.72M10.5 10.5a3.5 3.5 0 0 0 4.162 4.162m-1.162-1.162a3.5 3.5 0 0 1-4.162-4.162" />
+                </svg>
+              </button>
+            </div>
           </div>
           <button
             type="submit"

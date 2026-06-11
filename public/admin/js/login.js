@@ -48,7 +48,7 @@ async function handleLogin(e) {
         sessionStorage.setItem("admin_auth", "1");
         showToast("Access granted!");
         setTimeout(() => {
-          window.location.href = "dashboard.html";
+          window.location.href = "/admin/dashboard";
         }, 500);
       } else {
         showToast("Wrong password", "error");
@@ -60,7 +60,7 @@ async function handleLogin(e) {
       sessionStorage.setItem("admin_auth", "1");
       showToast("Password saved! Redirecting...");
       setTimeout(() => {
-        window.location.href = "dashboard.html";
+        window.location.href = "/admin/dashboard";
       }, 500);
     }
   } catch (err) {
@@ -83,12 +83,32 @@ function resetButton(btn) {
 document.addEventListener("DOMContentLoaded", () => {
   // Jika admin sudah login sebelumnya, langsung arahkan ke Dashboard
   if (sessionStorage.getItem("admin_auth") === "1") {
-    window.location.href = "dashboard.html";
+    window.location.href = "/admin/dashboard";
     return;
   }
 
   const loginForm = document.getElementById("loginForm");
   if (loginForm) {
     loginForm.addEventListener("submit", handleLogin);
+  }
+
+  // Handle password visibility toggle
+  const togglePasswordBtn = document.getElementById("togglePassword");
+  const passwordInput = document.getElementById("password");
+  const eyeOpenIcon = document.getElementById("eyeOpen");
+  const eyeClosedIcon = document.getElementById("eyeClosed");
+
+  if (togglePasswordBtn && passwordInput && eyeOpenIcon && eyeClosedIcon) {
+    togglePasswordBtn.addEventListener("click", () => {
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        eyeOpenIcon.classList.add("hidden");
+        eyeClosedIcon.classList.remove("hidden");
+      } else {
+        passwordInput.type = "password";
+        eyeOpenIcon.classList.remove("hidden");
+        eyeClosedIcon.classList.add("hidden");
+      }
+    });
   }
 });
